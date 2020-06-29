@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FolyamatbanLevoSzerelesek">
+  <children>
+    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1200.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Új">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#ujSzereles" text="Szerelés" />
+                  <MenuItem mnemonicParsing="false" onAction="#ujJavitasTipus" text="Javítástípus" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Szereles">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#lezartSzerelesekPushed" text="Lezárt szerlések" />
+            <MenuItem fx:id="folyamatbanLevoSzerelesekMI" mnemonicParsing="false" onAction="#folyamatbanLevoSzerelesek" text="Folyamatban lévő szerelések" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TableView fx:id="folyamatbanLevoSzerelesekTV" layoutX="93.0" layoutY="111.0" prefHeight="300.0" prefWidth="600.0">
+      <columns>
+        <TableColumn fx:id="nevOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Név" />
+        <TableColumn fx:id="telefonszamOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Telefonszám" />
+        <TableColumn fx:id="szerelesKezdeteOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Szereles kezdete" />
+        <TableColumn fx:id="tipusOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="149.0" text="Típus" />
+      </columns>
+      <contextMenu>
+        <ContextMenu>
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#szerelesSzerkesztesereNavigal" text="Szerkesztés" />
+          </items>
+        </ContextMenu>
+      </contextMenu>
+    </TableView>
+      <Button layoutX="93.0" layoutY="425.0" mnemonicParsing="false" text="Szerelés szerkesztése" />
+  </children>
+</AnchorPane>

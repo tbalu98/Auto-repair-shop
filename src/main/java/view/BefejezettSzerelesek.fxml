@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BefejezettSzerelesekController">
+   <children>
+      <VBox layoutX="760.0" layoutY="31.0" prefHeight="300.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="204.0" text="Bevétel" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Mai bevétel" />
+                  <Label text="Ehavi bevétel" GridPane.rowIndex="1" />
+                  <Label text="Ezévi bevétel" GridPane.rowIndex="2" />
+                  <Label fx:id="MaiBevetel" text="0" GridPane.columnIndex="1" />
+                  <Label fx:id="EHaviBevetel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="EzEviBevetel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <VBox layoutX="199.0" layoutY="31.0" prefHeight="700.0" prefWidth="500.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="500.0" text="Befejezett szerelések" />
+            <TableView fx:id="BefejezettSzerelesekTablaNezet" prefHeight="500.0" prefWidth="500.0">
+               <columns>
+                  <TableColumn fx:id="RendszamOszlop" prefWidth="125.0" text="Rendszam" />
+                  <TableColumn fx:id="SzerelesKezdeteOszlop" prefWidth="125.0" text="Szereles kezdete" />
+                  <TableColumn fx:id="SzerelesVegeOszlop" prefWidth="125.0" text="Szereles vége" />
+                  <TableColumn fx:id="ArOszlop" prefWidth="125.0" text="Ár" />
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

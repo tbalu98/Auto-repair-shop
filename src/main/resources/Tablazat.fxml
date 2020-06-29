@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="otletek.Controller">
+    <children>
+        <TableView fx:id="tulajdonosTabla" layoutX="100.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="450.0">
+            <columns>
+                <TableColumn fx:id="jogositvanyszamOszlop" minWidth="150.0" prefWidth="75.0" text="Jogosítványszám" />
+                <TableColumn fx:id="nevOszlop" minWidth="150.0" prefWidth="75.0" text="Név" />
+                <TableColumn fx:id="lakcimOszlop" minWidth="150.0" prefWidth="75.0" text="Lakcím" />
+            </columns>
+        </TableView>
+        <VBox layoutX="713.0" layoutY="420.0" prefHeight="141.0" prefWidth="300.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+            </children></VBox>
+        <VBox layoutX="100.0" layoutY="421.0" prefHeight="300.0" prefWidth="335.0">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="pushButton" mnemonicParsing="false" onAction="#pushPushed" text="Push" />
+               </children></HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+                <HBox prefHeight="100.0" prefWidth="200.0" />
+            </children>
+        </VBox>
+
+    </children>
+</AnchorPane>

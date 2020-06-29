@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="guidemo.FXMLDocumentController">
+  <children>
+    <VBox layoutX="10.0" layoutY="11.0" prefHeight="367.0" prefWidth="212.0" spacing="10.0">
+      <children>
+        <Label text="Checkbox objects">
+          <font>
+            <Font name="System Bold Italic" size="18.0" />
+          </font>
+        </Label>
+        <CheckBox mnemonicParsing="false" text="Pineapple" />
+        <CheckBox mnemonicParsing="false" text="Pepperoni" />
+        <CheckBox mnemonicParsing="false" text="Bacon" />
+        <Button mnemonicParsing="false" text="Order Pizza" />
+        <Label fx:id="pizzaOrderLabel" alignment="TOP_LEFT" prefHeight="181.0" prefWidth="198.0" text="Label" />
+      </children>
+    </VBox>
+    <AnchorPane layoutX="20.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" />
+    <AnchorPane layoutX="552.0" layoutY="353.0" prefHeight="200.0" prefWidth="200.0">
+      <children>
+        <Button layoutX="7.0" layoutY="87.0" mnemonicParsing="false" onAction="#changeScreenButtonPushed" prefWidth="200.0" text="Go to Table View" />
+      </children>
+    </AnchorPane>
+  </children>
+</AnchorPane>

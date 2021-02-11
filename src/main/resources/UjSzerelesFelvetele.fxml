@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UjSzerelesFelvetele">
+<AnchorPane prefHeight="1024.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.NewRepair">
   <children>
-    <MenuBar fx:id="menuBar" prefHeight="30.0" prefWidth="1200.0">
+    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1920.0">
       <menus>
-        <Menu mnemonicParsing="false" text="Új">
+        <Menu mnemonicParsing="false" text="New">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#ujSzereles" text="Szerelés" />
-            <MenuItem mnemonicParsing="false" onAction="#ujJavitasTipus" text="Javítás típus" />
+            <MenuItem mnemonicParsing="false" onAction="#newRepair" text="Repair" />
+            <MenuItem mnemonicParsing="false" onAction="#newAssemblyType" text="Assembly type" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Szereles">
+        <Menu mnemonicParsing="false" text="Repair">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#lezartSzerelesekPushed" text="Lezárt szerlések" />
-            <MenuItem fx:id="folyamatbanLevoSzerelesekMI" mnemonicParsing="false" onAction="#folyamatbanLevoSzerelesek" text="Folyamatban lévő szerelések" />
+            <MenuItem mnemonicParsing="false" onAction="#finishedRepairsPushed" text="Finished repairs" />
+            <MenuItem mnemonicParsing="false" onAction="#ongoingRepairs" text="Ongoing repairs" fx:id="folyamatbanLevoSzerelesekMI" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <GridPane layoutX="14.0" layoutY="206.0" prefHeight="266.0" prefWidth="394.0">
       <children>
-        <Label text="Típus" />
+        <Label text="Type" />
         <TextField id="tipusTextField" fx:id="tipusTF" prefWidth="200.0" GridPane.columnIndex="1" />
-        <Label text="Motor térfogata" GridPane.rowIndex="1" />
+        <Label text="Engine volume" GridPane.rowIndex="1" />
         <TextField id="motorTerfogata" fx:id="motorTerfogataTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="Teljesítmény" GridPane.rowIndex="2" />
+        <Label text="Performance" GridPane.rowIndex="2" />
         <TextField id="teljesitmenyTextField" fx:id="teljesitmenyTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Button mnemonicParsing="false" onAction="#gepjarmuParameterreKeresPushed" text="Keres" GridPane.rowIndex="3" />
-        <Button mnemonicParsing="false" onAction="#ujGepjarmuparameterFelvetelPushed" text="Új paraméter" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label text="Évjárat" GridPane.rowIndex="5" />
+        <Button mnemonicParsing="false" onAction="#gepjarmuParameterreKeresPushed" text="Find" GridPane.rowIndex="3" />
+        <Button mnemonicParsing="false" onAction="#ujGepjarmuparameterFelvetelPushed" text="New parameter" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="Year" GridPane.rowIndex="5" />
         <TextField fx:id="evjaratTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <Label text="Vizsga lejárta" GridPane.rowIndex="6" />
+        <Label text="Technical approval expires" GridPane.rowIndex="6" />
         <DatePicker fx:id="vizsgaLejartaDP" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <Label text="Alvázszám" GridPane.rowIndex="4" />
-        <Button mnemonicParsing="false" onAction="#gepjarmureKeresPushed" text="Keres" GridPane.rowIndex="7" />
+        <Label text="Vehicle identification number" GridPane.rowIndex="4" />
+        <Button mnemonicParsing="false" onAction="#gepjarmureKeresPushed" text="Find" GridPane.rowIndex="7" />
         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
           <buttons>
             <Button mnemonicParsing="false" onAction="#ujGepjarmuPushed" prefHeight="26.0" prefWidth="108.0" text="Új autó" />
-            <Button mnemonicParsing="false" text="Hozzáad" />
+            <Button mnemonicParsing="false" text="Add" />
           </buttons>
         </ButtonBar>
         <TextField fx:id="alvazszamTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -60,45 +61,45 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button layoutX="14.0" layoutY="613.0" mnemonicParsing="false" onAction="#szerelesInditasaPushed" prefHeight="82.0" prefWidth="198.0" text="Szerelés indítása" />
-    <TableView fx:id="ugyfelTV" layoutX="458.0" layoutY="47.0" prefHeight="144.0" prefWidth="511.0">
+    <Button layoutX="14.0" layoutY="613.0" mnemonicParsing="false" onAction="#szerelesInditasaPushed" prefHeight="82.0" prefWidth="198.0" text="Start repair" />
+    <TableView fx:id="ugyfelTV" layoutX="458.0" layoutY="47.0" prefHeight="144.0" prefWidth="1113.0">
       <columns>
-        <TableColumn fx:id="nevOszlop" prefWidth="151.20001220703125" text="Név" />
-        <TableColumn fx:id="telefonszamOszlop" prefWidth="125.800048828125" text="Telefonszám" />
-        <TableColumn fx:id="lakcimOszlop" prefWidth="234.199951171875" text="Lakcím" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="325.20001220703125" text="Name" fx:id="nevOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="274.800048828125" text="Telephone number" fx:id="telefonszamOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="512.199951171875" text="Address" fx:id="lakcimOszlop" />
       </columns>
       <contextMenu>
         <ContextMenu>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#ugyfeletKivalasztPushed" text="Kiválaszt" />
+            <MenuItem mnemonicParsing="false" onAction="#ugyfeletKivalasztPushed" text="Choose" />
           </items>
         </ContextMenu>
       </contextMenu>
     </TableView>
-    <TableView fx:id="gepjarmuparameterTV" layoutX="458.0" layoutY="206.0" prefHeight="128.0" prefWidth="511.0">
+    <TableView fx:id="gepjarmuparameterTV" layoutX="458.0" layoutY="206.0" prefHeight="128.0" prefWidth="1113.0">
       <columns>
-        <TableColumn fx:id="tipusOszlop" prefWidth="232.20001220703125" text="Típus" />
-        <TableColumn fx:id="motorterfogatOszlop" prefWidth="117.4000244140625" text="Motor térfogat" />
-        <TableColumn fx:id="teljesitmenyOszlop" prefWidth="161.5999755859375" text="Teljesítmény" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="395.20001220703125" text="Type" fx:id="tipusOszlop" />
+        <TableColumn prefWidth="117.4000244140625" text="Engine volume" fx:id="motorterfogatOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="599.5999755859375" text="Performance" fx:id="teljesitmenyOszlop" />
       </columns>
       <contextMenu>
         <ContextMenu>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#gepjarmuParametertKivalasztPushed" text="Kiválaszt" />
+            <MenuItem mnemonicParsing="false" onAction="#gepjarmuParametertKivalasztPushed" text="Choose" />
           </items>
         </ContextMenu>
       </contextMenu>
     </TableView>
     <GridPane layoutX="14.0" layoutY="47.0" prefHeight="144.0" prefWidth="394.0">
       <children>
-        <Label text="Név" />
-        <Label text="Telefonszám" GridPane.rowIndex="1" />
-        <Label text="Lakcím" GridPane.rowIndex="2" />
-        <Button mnemonicParsing="false" onAction="#ugyfeltKeresPushed" text="Keres" GridPane.rowIndex="3" />
+        <Label text="Name" />
+        <Label text="Telephone number" GridPane.rowIndex="1" />
+        <Label text="Address" GridPane.rowIndex="2" />
+        <Button mnemonicParsing="false" onAction="#ugyfeltKeresPushed" text="Find" GridPane.rowIndex="3" />
         <TextField id="nevTextField" fx:id="nevTF" GridPane.columnIndex="1" />
         <TextField id="telefonszamTextField" fx:id="telefonszamTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField id="lakcimTextField" fx:id="lakcimTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Button id="ujUgyfelFelvetele" fx:id="ujUgyfelB" mnemonicParsing="false" onAction="#ujUgyfeletFelveszPushed" text="Új ügyfél felvétele" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Button id="ujUgyfelFelvetele" fx:id="ujUgyfelB" mnemonicParsing="false" onAction="#ujUgyfeletFelveszPushed" text="New customer" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -111,19 +112,19 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <TableView fx:id="teljesGepjarmuTV" layoutX="458.0" layoutY="339.0" prefHeight="128.0" prefWidth="687.0">
+    <TableView fx:id="teljesGepjarmuTV" layoutX="458.0" layoutY="339.0" prefHeight="128.0" prefWidth="1113.0">
       <columns>
-        <TableColumn fx:id="alvazszamOszlop" prefWidth="109.0" text="Alvázszám" />
-        <TableColumn fx:id="evjaratOszlop" prefWidth="68.60003662109375" text="Évjárat" />
-        <TableColumn fx:id="vizsgaLejartaOszlop" prefWidth="124.60003662109375" text="Vizsga lejárta" />
-        <TableColumn fx:id="ptipusOszlop" prefWidth="161.20001220703125" text="Típus" />
-        <TableColumn fx:id="pmotorterfogatOszlop" prefWidth="114.79998779296875" text="Motor térfogat" />
-        <TableColumn fx:id="pteljesitmenyOszlop" prefWidth="107.5999755859375" text="Teljesítmény" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="230.0" text="Vehicle identification number" fx:id="alvazszamOszlop" />
+        <TableColumn prefWidth="68.60003662109375" text="Year" fx:id="evjaratOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="212.60003662109375" text="Technical approval expires" fx:id="vizsgaLejartaOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="309.20001220703125" text="Type" fx:id="ptipusOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="133.79998779296875" text="Engine volume" fx:id="pmotorterfogatOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="154.5999755859375" text="Performance" fx:id="pteljesitmenyOszlop" />
       </columns>
       <contextMenu>
         <ContextMenu onAction="#gepjarmuvetKivalasztPushed">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#gepjarmuvetKivalasztPushed" text="Kiválaszt" />
+            <MenuItem mnemonicParsing="false" onAction="#gepjarmuvetKivalasztPushed" text="Choose" />
           </items>
         </ContextMenu>
       </contextMenu>

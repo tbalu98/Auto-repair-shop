@@ -1,7 +1,6 @@
 package daos;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import controllers.LezartSzerelesek;
 import entities.QSzereles;
 import entities.Szereles;
 

@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SzerelesSzerkesztese">
+<AnchorPane prefHeight="1020.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.EditRepairs">
   <children>
-    <HBox layoutX="69.0" layoutY="55.0" prefHeight="100.0" prefWidth="799.0">
+    <HBox layoutX="69.0" layoutY="55.0" prefHeight="100.0" prefWidth="1000.0">
       <children>
         <GridPane prefHeight="109.0" prefWidth="274.0">
           <children>
-            <Label text="Név:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Telefonszám:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label text="Lakcím:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Label text="Tulajdonos" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Telephone number:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label text="Owner" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label fx:id="nevL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="telefonszamL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="lakcimL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -30,10 +32,10 @@
         </GridPane>
         <GridPane prefWidth="262.0">
           <children>
-            <Label text="Gépjármű parameterei:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label text="Típus:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Motor térfogata:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label text="Teljesítmény:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label text="Auto's parameter" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Engine's volume" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="Performance:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <Label fx:id="tipusL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="motorTerfogataL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="teljesitmenyL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -49,11 +51,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane prefHeight="100.00009999999747" prefWidth="332.0">
+        <GridPane prefHeight="100.0" prefWidth="422.0">
           <children>
-            <Label text="Gépjarmű további adatai:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label text="Évjárat:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Vizsga lejárta:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="Auto's further parameters" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Year:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Technical approval expires:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label fx:id="evjaratL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="vizsgaLejartaL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
           </children>
@@ -69,29 +71,29 @@
         </GridPane>
       </children>
     </HBox>
-    <HBox layoutX="69.0" layoutY="226.0" prefHeight="188.0" prefWidth="1000.0">
+    <HBox layoutX="69.0" layoutY="226.0" padding="$x1" prefHeight="188.0" prefWidth="1600.0">
       <children>
-        <VBox prefHeight="200.0" prefWidth="500.0">
+        <VBox prefHeight="200.0" prefWidth="700.0">
           <children>
             <HBox prefHeight="30.0" prefWidth="350.0">
               <children>
-                <Label text="Javítások" />
+                <Label text="Assemblies" />
               </children>
             </HBox>
             <HBox prefHeight="170.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="javitasokTV" prefHeight="164.0" prefWidth="487.0">
+                <TableView fx:id="javitasokTV" prefHeight="164.0" prefWidth="700.0">
                   <columns>
-                    <TableColumn fx:id="leirasOszlop" prefWidth="200.0" text="Leírás" />
-                    <TableColumn fx:id="munkaorakSzamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="79.0" text="Munkaóra" />
-                    <TableColumn fx:id="arOszlop" prefWidth="69.0" text="Ár" />
-                    <TableColumn fx:id="javitasGaranciaIdotartamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="137.0" text="Garancia időtartama" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="422.0" text="Description" fx:id="leirasOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Working hours" fx:id="munkaorakSzamaOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="73.0" text="Price" fx:id="arOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="71.0" text="Gurantee" fx:id="javitasGaranciaIdotartamaOszlop" />
                   </columns>
                   <contextMenu>
                     <ContextMenu>
                       <items>
-                        <MenuItem fx:id="javitasTorleseMI" mnemonicParsing="false" onAction="#javitasTorlesePushed" text="Törlés" />
-                        <MenuItem fx:id="felhasznaltAlkatreszeiMI" mnemonicParsing="false" onAction="#felhasznaltAlkatreszeinekMegjelenitesePushed" text="Alkatrészei" />
+                        <MenuItem mnemonicParsing="false" onAction="#javitasTorlesePushed" text="Törlés" fx:id="javitasTorleseMI" />
+                        <MenuItem mnemonicParsing="false" onAction="#felhasznaltAlkatreszeinekMegjelenitesePushed" text="Alkatrészei" fx:id="felhasznaltAlkatreszeiMI" />
                       </items>
                     </ContextMenu>
                   </contextMenu>
@@ -99,27 +101,30 @@
               </children>
             </HBox>
           </children>
+          <padding>
+            <Insets right="20.0" fx:id="x1" />
+          </padding>
         </VBox>
-        <VBox prefHeight="200.0" prefWidth="500.0">
+        <VBox prefHeight="200.0" prefWidth="700.0">
           <children>
             <HBox prefHeight="30.0" prefWidth="350.0">
               <children>
-                <Label text="Felhasznált alkatrészek" />
+                <Label text="Parts" />
               </children>
             </HBox>
             <HBox prefHeight="170.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="felhasznaltAlkatreszekTV" prefHeight="164.0" prefWidth="500.0">
+                <TableView fx:id="felhasznaltAlkatreszekTV" prefHeight="164.0" prefWidth="700.0">
                   <columns>
-                    <TableColumn fx:id="nevOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Név" />
-                    <TableColumn fx:id="arOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Ár" />
-                    <TableColumn fx:id="garanciaIdotartamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Garancia időtartama" />
-                    <TableColumn fx:id="cikkszamOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Cikkszám" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="195.0" text="Name" fx:id="nevOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Price" fx:id="arOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Guarantee" fx:id="garanciaIdotartamaOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Part code" fx:id="cikkszamOszlop" />
                   </columns>
                   <contextMenu>
                     <ContextMenu>
                       <items>
-                        <MenuItem fx:id="alkatreszTorleseMI" mnemonicParsing="false" onAction="#alkatreszTorlesePushed" text="Törlés" />
+                        <MenuItem mnemonicParsing="false" onAction="#alkatreszTorlesePushed" text="Törlés" fx:id="alkatreszTorleseMI" />
                       </items>
                     </ContextMenu>
                   </contextMenu>
@@ -130,18 +135,18 @@
         </VBox>
       </children>
     </HBox>
-    <GridPane layoutX="69.0" layoutY="464.0" prefHeight="240.0" prefWidth="487.0000999999975">
+    <GridPane layoutX="68.0" layoutY="464.0" prefHeight="240.0" prefWidth="700.0">
       <children>
-        <Label text="Leírás" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Description" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextArea fx:id="leirasTA" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label alignment="TOP_LEFT" text="Fix ár:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label alignment="TOP_LEFT" text="Fixed price" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField id="arTextField" fx:id="fixArTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="Garancia időtartama:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="Guarantee:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <TextField fx:id="javitasGaranciaIdotartamaTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Button mnemonicParsing="false" onAction="#javitasTipustKeresPushed" text="Keres" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label text="Munkaórák száma:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Button mnemonicParsing="false" onAction="#javitasTipustKeresPushed" text="Find" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Working hours:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <TextField fx:id="munkaorakSzamaTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Button mnemonicParsing="false" onAction="#javitastHozzaadPushed" text="Javítást Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Button mnemonicParsing="false" onAction="#javitastHozzaadPushed" text="Add assembly" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -156,18 +161,18 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <GridPane layoutX="570.0" layoutY="446.0" prefHeight="150.0" prefWidth="401.0">
+    <GridPane layoutX="800.0" layoutY="446.0" prefHeight="150.0" prefWidth="669.0">
       <children>
-        <Label text="Név" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="Ár" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label text="Garancia időtartama:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="nevTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Price" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="Guarantee:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="nevTF" prefWidth="319.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <TextField fx:id="arTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField id="garanciaIdotartamaTF" fx:id="felhasznaltAlkatreszgaranciaIdotartamaTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Button id="alkatresztHozzaad" mnemonicParsing="false" onAction="#alkatresztHozzaadPushed" text="Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Label text="Cikkszám:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Button id="alkatresztHozzaad" mnemonicParsing="false" onAction="#alkatresztHozzaadPushed" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="Part code:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <TextField fx:id="cikkszamTF" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Button id="alkatresztKeresPush" mnemonicParsing="false" onAction="#alkatresztKeresPush" text="Keres" GridPane.rowIndex="4" />
+        <Button id="alkatresztKeresPush" mnemonicParsing="false" onAction="#alkatresztKeresPush" text="Find" GridPane.rowIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -181,52 +186,53 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1200.0">
+    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1920.0">
       <menus>
-        <Menu mnemonicParsing="false" text="Új">
+        <Menu mnemonicParsing="false" text="New">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#ujSzereles" text="Szerelés" />
-            <MenuItem mnemonicParsing="false" onAction="#ujJavitasTipus" text="Javítás típus" />
+            <MenuItem mnemonicParsing="false" onAction="#newRepairs" text="Repair" />
+            <MenuItem mnemonicParsing="false" onAction="#newAssemblyType" text="Assembly type" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Szereles">
+        <Menu mnemonicParsing="false" text="Repair">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#lezartSzerelesekPushed" text="Lezárt szerlések" />
-            <MenuItem mnemonicParsing="false" onAction="#folyamatbanLevoSzerelesek" text="Folyamatban lévő szerelések" />
+            <MenuItem mnemonicParsing="false" onAction="#finishedRepairs" text="Finished repairs" />
+            <MenuItem mnemonicParsing="false" onAction="#ongoingRepairs" text="Ongoing repairs" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <TableView fx:id="javitasTipusokTV" layoutX="69.0" layoutY="704.0" prefHeight="164.0" prefWidth="487.0">
+    <TableView fx:id="javitasTipusokTV" layoutX="69.0" layoutY="704.0" prefHeight="164.0" prefWidth="680.0">
       <columns>
-        <TableColumn fx:id="leirasOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="248.0" text="Leírás" />
-        <TableColumn fx:id="fixarOszlop" prefWidth="75.0" text="Fixár" />
-        <TableColumn fx:id="garanciaIdotartamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Garancia időtartama" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="482.0" text="Description" fx:id="leirasOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="95.0" text="Fixed price" fx:id="fixarOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Guarantee" fx:id="garanciaIdotartamaOszlop" />
       </columns>
       <contextMenu>
         <ContextMenu>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#javitasTipustValaszt" text="Kiválaszt" />
+            <MenuItem mnemonicParsing="false" onAction="#javitasTipustValaszt" text="Choose" />
           </items>
         </ContextMenu>
       </contextMenu>
     </TableView>
-    <Button layoutX="931.0" layoutY="598.0" mnemonicParsing="false" onAction="#szerelestLezarPushed" prefHeight="56.0" prefWidth="138.0" text="Szerelés lezárása" />
-    <Button layoutX="569.0" layoutY="598.0" mnemonicParsing="false" onAction="#modositasokMentesePushed" prefHeight="59.0" prefWidth="200.0" text="Módositasok mentése" />
-    <TableView id="alkatreszTV" fx:id="alkatreszekTV" layoutX="569.0" layoutY="704.0" prefHeight="164.0" prefWidth="500.0">
+    <Button layoutX="1331.0" layoutY="878.0" mnemonicParsing="false" onAction="#szerelestLezarPushed" prefHeight="56.0" prefWidth="138.0" text="End reapair" />
+    <Button layoutX="1119.0" layoutY="875.0" mnemonicParsing="false" onAction="#modositasokMentesePushed" prefHeight="59.0" prefWidth="200.0" text="Save" />
+    <TableView id="alkatreszTV" fx:id="alkatreszekTV" layoutX="769.0" layoutY="704.0" prefHeight="164.0" prefWidth="700.0">
       <columns>
-        <TableColumn fx:id="alkatreszNevOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Név" />
-        <TableColumn fx:id="alkatreszArOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="147.0" text="Ár" />
-        <TableColumn fx:id="alkatreszGaranciaIdotartamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="226.0" text="Garancia időtartama" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="425.0" text="Name" fx:id="alkatreszNevOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" text="Price" fx:id="alkatreszArOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Guarantee" fx:id="alkatreszGaranciaIdotartamaOszlop" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="81.0" text="Part code" fx:id="alkatreszCikkszamOszlop" />
       </columns>
       <contextMenu>
         <ContextMenu>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#alkatresztKivalasztPushed" text="Kiválaszt" />
+            <MenuItem mnemonicParsing="false" onAction="#alkatresztKivalasztPushed" text="Choose" />
           </items>
         </ContextMenu>
       </contextMenu>
     </TableView>
-    <Button layoutX="967.0" layoutY="569.0" mnemonicParsing="false" onAction="#ujAlkatreszPushed" text="Új alkatrész" />
+    <Button layoutX="967.0" layoutY="569.0" mnemonicParsing="false" onAction="#ujAlkatreszPushed" text="New part" />
   </children>
 </AnchorPane>

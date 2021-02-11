@@ -59,8 +59,8 @@ public class MainAppClass extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();*/
        //---
-        primaryStage.setTitle("Gépjárműszerelő program");
-        primaryStage.setScene(new Scene(root, 1200, 900));
+        primaryStage.setTitle("Auto repair shop");
+        primaryStage.setScene(new Scene(root, 1920, 1024));
         primaryStage.show();
     }
 

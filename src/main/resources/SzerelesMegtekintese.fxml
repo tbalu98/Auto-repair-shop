@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SzerelesMegtekintese">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1920.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ViewRepairs">
   <children>
-    <HBox layoutX="14.0" layoutY="47.0" prefHeight="100.0" prefWidth="799.0">
+    <HBox layoutX="100.0" layoutY="47.0" prefHeight="100.0" prefWidth="1600.0">
       <children>
         <GridPane prefHeight="109.0" prefWidth="274.0">
           <children>
-            <Label text="Név:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Telefonszám:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label text="Lakcím:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Label text="Tulajdonos" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label id="nevL" fx:id="nevL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label id="telefonszamL" fx:id="telefonszamL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label id="lakcimL" fx:id="lakcimL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Telephone number:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="Adress:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label text="Owner" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="nevL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="telefonszamL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lakcimL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,13 +32,13 @@
         </GridPane>
         <GridPane prefWidth="262.0">
           <children>
-            <Label text="Gépjármű parameterei:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label text="Típus:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Motor térfogata:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label text="Teljesítmény:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Label id="tipusL" fx:id="tipusL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label id="motorTerfogataL" fx:id="motorTerfogataL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label id="teljesitmenyL" fx:id="teljesitmenyL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Auto's parameters" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Volume of the engine:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label text="Power:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label fx:id="tipusL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="motorTerfogataL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="teljesitmenyL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="156.0" />
@@ -51,11 +53,11 @@
         </GridPane>
         <GridPane prefHeight="100.00009999999747" prefWidth="332.0">
           <children>
-            <Label text="Gépjarmű további adatai:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label text="Évjárat:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Vizsga lejárta:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label id="evjaratL" fx:id="evjaratL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label id="vizsgaLejartaL" fx:id="vizsgaLejartaL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Auto's further parameters:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Year:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Traffic license expires:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label fx:id="evjaratL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="vizsgaLejartaL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="177.0" />
@@ -69,23 +71,23 @@
         </GridPane>
       </children>
     </HBox>
-    <HBox layoutX="14.0" layoutY="168.0" prefHeight="188.0" prefWidth="1000.0">
+    <HBox layoutX="100.0" layoutY="168.0" prefHeight="452.0" prefWidth="1600.0">
       <children>
         <VBox prefHeight="200.0" prefWidth="500.0">
           <children>
             <HBox prefHeight="30.0" prefWidth="350.0">
               <children>
-                <Label text="Javítások" />
+                <Label text="Assemblies:" />
               </children>
             </HBox>
-            <HBox prefHeight="170.0" prefWidth="200.0">
+            <HBox prefHeight="314.0" prefWidth="700.0">
               <children>
-                <TableView fx:id="javitasokTV" prefHeight="164.0" prefWidth="487.0">
+                <TableView fx:id="javitasokTV" maxWidth="800.0" minWidth="700.0" prefHeight="164.0" prefWidth="800.0">
                   <columns>
-                    <TableColumn fx:id="leirasOszlop" prefWidth="159.19998455047607" text="Leírás" />
-                    <TableColumn fx:id="munkaorakSzamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="84.00001525878906" text="Munkaóra" />
-                    <TableColumn fx:id="arOszlop" prefWidth="97.19999694824219" text="Ár" />
-                    <TableColumn fx:id="javitasGaranciaIdotartamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="147.80001831054688" text="GaranciaIdoTartama" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="380.1999845504761" text="Description" fx:id="leirasOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="117.00001525878906" text="Working hours" fx:id="munkaorakSzamaOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="98.19999694824219" text="Price" fx:id="arOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.80001831054688" text="Guarantee" fx:id="javitasGaranciaIdotartamaOszlop" />
                   </columns>
                   <contextMenu>
                     <ContextMenu>
@@ -98,22 +100,25 @@
               </children>
             </HBox>
           </children>
+          <padding>
+            <Insets right="20.0" />
+          </padding>
         </VBox>
         <VBox prefHeight="200.0" prefWidth="500.0">
           <children>
             <HBox prefHeight="30.0" prefWidth="350.0">
               <children>
-                <Label text="Felhasznált alkatrészek" />
+                <Label text="Used Parts" />
               </children>
             </HBox>
-            <HBox prefHeight="170.0" prefWidth="200.0">
+            <HBox prefHeight="314.0" prefWidth="700.0">
               <children>
-                <TableView fx:id="felhasznaltAlkatreszekTV" prefHeight="164.0" prefWidth="500.0">
+                <TableView fx:id="felhasznaltAlkatreszekTV" maxWidth="700.0" minWidth="700.0" prefHeight="314.0" prefWidth="700.0">
                   <columns>
-                    <TableColumn fx:id="nevOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Név" />
-                    <TableColumn fx:id="arOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Ár" />
-                    <TableColumn fx:id="garanciaIdotartamaOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Garancia időtartama" />
-                    <TableColumn fx:id="cikkszamOszlop" maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Cikkszám" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="337.0" text="Name" fx:id="nevOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Price" fx:id="arOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="163.0" text="Gurantee" fx:id="garanciaIdotartamaOszlop" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Part code" fx:id="cikkszamOszlop" />
                   </columns>
                 </TableView>
               </children>
@@ -122,18 +127,18 @@
         </VBox>
       </children>
     </HBox>
-    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1200.0">
+    <MenuBar fx:id="menuBar" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="1920.0">
       <menus>
-        <Menu mnemonicParsing="false" text="Új">
+        <Menu mnemonicParsing="false" text="New">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#ujSzereles" text="Szerelés" />
-            <MenuItem mnemonicParsing="false" onAction="#ujJavitasTipus" text="Javítás típus" />
+            <MenuItem mnemonicParsing="false" onAction="#newRepairs" text="Repair" />
+            <MenuItem mnemonicParsing="false" onAction="#newAssemblyType" text="Repair type" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Szereles">
+        <Menu mnemonicParsing="false" text="Repair">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#lezartSzerelesekPushed" text="Lezárt szerlések" />
-            <MenuItem mnemonicParsing="false" onAction="#folyamatbanLevoSzerelesek" text="Folyamatban lévő szerelések" />
+            <MenuItem mnemonicParsing="false" onAction="#finishedRepairs" text="Finished repairs" />
+            <MenuItem mnemonicParsing="false" onAction="#ongoingRepairs" text="Ongoing repairs" />
           </items>
         </Menu>
       </menus>

@@ -1,6 +1,5 @@
 package nezetek;
 
-import controllers.LezartSzerelesek;
 import entities.Szereles;
 
 import java.sql.Timestamp;

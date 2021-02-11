@@ -1,7 +1,5 @@
 package controllers;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,10 +11,14 @@ import javafx.stage.Stage;
 import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+/**
+ * The BasicController class represents the most important functions of a controller with a menu bar.
+ * The functions are responsible for changing to another scene, showing error message and creating a new window.
+ */
 
 public abstract class BasicController implements Initializable{
 
@@ -27,24 +29,24 @@ public abstract class BasicController implements Initializable{
 
 
 
-    private void showUjScene(Scene ujScene){
+    private void showNewScene(Scene newScene){
 
         Stage window = (Stage)menuBar.getScene().getWindow();
 
-        window.setScene(ujScene);
+        window.setScene(newScene);
         window.show();
-        Logger.info("meghivtak");
+        //Logger.info("meghivtak");
 
 
     }
 
-    private Parent getParent(String fxmlNev) throws IOException {
+    private Parent getParent(String fxmlName) throws IOException {
         /*FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource(fxmlNev + ".fxml"));
+                .getResource(fxmlName + ".fxml"));
         loader.setLocation(FXMLLoader.getDefaultClassLoader()
-                .getResource(fxmlNev+".fxml"));
+                .getResource(fxmlName+".fxml"));
 */
-        Parent root = this.getLoader(fxmlNev).load();
+        Parent root = this.getLoader(fxmlName).load();
 
         return root;
 
@@ -54,28 +56,28 @@ public abstract class BasicController implements Initializable{
         return loader.load();
     }
 
-    private FXMLLoader getLoader(String fxmlNev){
+    private FXMLLoader getLoader(String fxmlName){
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource(fxmlNev + ".fxml"));
+                .getResource(fxmlName + ".fxml"));
         loader.setLocation(FXMLLoader.getDefaultClassLoader()
-                .getResource(fxmlNev+".fxml"));
+                .getResource(fxmlName+".fxml"));
 
         return loader;
 
     }
 
-    public void scenetValt( String fxmlNev) throws IOException{
+    public void changeScene(String fxmlName) throws IOException{
   /*      FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource(fxmlNev + ".fxml"));
+                .getResource(fxmlName + ".fxml"));
         loader.setLocation(FXMLLoader.getDefaultClassLoader()
-                .getResource(fxmlNev+".fxml"));
+                .getResource(fxmlName+".fxml"));
 
         Parent root = loader.load();
 */
 
-        Scene ujScene = new Scene(this.getParent(fxmlNev ));
+        Scene ujScene = new Scene(this.getParent(fxmlName ));
 
-        this.showUjScene(ujScene);
+        this.showNewScene(ujScene);
   /*      Stage window = (Stage)menuBar.getScene().getWindow();
 
         window.setScene(ujScene);
@@ -94,29 +96,29 @@ public abstract class BasicController implements Initializable{
 
     }
 
-    public void ujAblak(String fxmlNev, String title)throws  IOException{
+    public void newWindow(String fxmlName, String title)throws  IOException{
 
-        FXMLLoader fxmlLoader = this.getLoader(fxmlNev);
-        Parent root1 = (Parent)fxmlLoader.load();
-       showUjStage(root1,title);
+        FXMLLoader fxmlLoader = this.getLoader(fxmlName);
+        Parent root = (Parent)fxmlLoader.load();
+       showNewStage(root,title);
     }
 
-    public void showUjStage(Parent root1, String title){
+    public void showNewStage(Parent root, String title){
 
         Stage stage = new Stage();
 
         stage.setTitle(title);
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root));
         stage.show();
 
 
     }
 
-    public void scenetValt(String fxmlNev, Object o) throws IOException{
+    public void changeScene(String fxmlName, Object o) throws IOException{
 
 
 
-        FXMLLoader loader = this.getLoader(fxmlNev);
+        FXMLLoader loader = this.getLoader(fxmlName);
         Logger.info(loader);
         Parent root = this.getParent(loader);
 
@@ -129,44 +131,44 @@ public abstract class BasicController implements Initializable{
 
 
 
-        this.showUjScene(scene);
+        this.showNewScene(scene);
 
 
 
     }
 
-    public void ujAblak(String fxmlNev, String title, Object o)throws IOException{
+    public void newWindow(String fxmlName, String title, Object o)throws IOException{
 
-        FXMLLoader loader = this.getLoader(fxmlNev);
+        FXMLLoader loader = this.getLoader(fxmlName);
 
 
-        Parent root1 = (Parent)loader.load();
+        Parent root = (Parent)loader.load();
         BasicControllerWithInitData controller = loader.getController();
         controller.initData(o);
-        showUjStage(root1,title);
+        showNewStage(root,title);
 
     }
 
-    public void ujAblak(String fxmlNev, String title, List l)throws IOException{
+    public void newWindow(String fxmlNev, String title, List list)throws IOException{
 
         FXMLLoader loader = this.getLoader(fxmlNev);
 
 
-        Parent root1 = (Parent)loader.load();
+        Parent root = (Parent)loader.load();
         BasicControllerWithInitData controller = loader.getController();
-        controller.initData(l);
-        showUjStage(root1,title);
+        controller.initData(list);
+        showNewStage(root,title);
 
     }
 
-    public void hibauzenetetHozLetreesMutat(String title, String header, String tanacs){
+    public void showErrorMessage(String title, String header, String advice){
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(header);
-        alert.setContentText(tanacs);
+        alert.setContentText(advice);
 
-        Logger.info("error");
+        //Logger.info("error");
         alert.showAndWait();
     }
 

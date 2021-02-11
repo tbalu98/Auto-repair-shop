@@ -13,12 +13,12 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Név" />
+                  <Label text="Name" />
                   <TextField fx:id="nevTextField" />
                </children></HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="GaranciaIdőtartama" />
+                  <Label text="Guarantee" />
                   <TextField fx:id="garanciaIdotartamaTextField" />
                </children></HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">

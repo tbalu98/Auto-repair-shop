@@ -16,7 +16,7 @@
         <querydsl.version>4.0.7</querydsl.version>
     </properties>
 
-    <description>Ebben a programban autoszerelesekrol (ugyfel, szereles, autok) tarolhatunk el informaciokat.</description>
+    <description>Ebben a programban autoszerelesekrol (customer, repair, autok) tarolhatunk el informaciokat.</description>
     <developers>
         <developer>
             <name>Tóth Balázs</name>

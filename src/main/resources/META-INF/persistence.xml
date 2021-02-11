@@ -5,14 +5,15 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>entities.Tulajdonos</class>
-        <class>entities.Gepjarmu</class>
-        <class>entities.Szereles</class>
-        <class>entities.Alkatresz</class>
+        <class>entities.Customer</class>
+        <class>entities.Car</class>
+        <class>entities.CarParameter</class>
+        <class>entities.Repair</class>
+        <class>entities.Part</class>
         <class>entities.SzereleshezHasznaltAlkatresz</class>
-        <class>entities.Javitas</class>
-        <class>entities.FixAruJavitas</class>
-        <class>entities.OradijasJavitas</class>
+        <class>entities.Assembly</class>
+        <class>entities.FixPricedAssembly</class>
+        <class>entities.HourlyPricedAssembly</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gepjarmuszerelo" />
             <property name="javax.persistence.jdbc.user" value="root"/>

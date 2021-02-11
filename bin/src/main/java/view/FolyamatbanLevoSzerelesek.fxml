@@ -24,7 +24,7 @@
                         <Button mnemonicParsing="false" onAction="#szerelesVegePushed" text="Szerelés vége" />
                     </children>
                 </HBox>
-            <Button mnemonicParsing="false" onAction="#visszaazUjSzerelesekFelvetelehezPushed" text="Vissza az új szereles felvételéhez" />
+            <Button mnemonicParsing="false" onAction="#visszaazUjSzerelesekFelvetelehezPushed" text="Vissza az új repair felvételéhez" />
             </children>
         </VBox>
     </children>

@@ -1,13 +1,13 @@
 package daos;
 
-import entities.FelhasznaltAlkatresz;
+import entities.UsedPart;
 
 import javax.persistence.EntityManager;
 
 
-public class EladottAlkatreszDao extends BasicDao<FelhasznaltAlkatresz> {
+public class EladottAlkatreszDao extends BasicDao<UsedPart> {
     public EladottAlkatreszDao(EntityManager em) {
-        super(FelhasznaltAlkatresz.class);
+        super(UsedPart.class);
         this.em = em;
     }
 }

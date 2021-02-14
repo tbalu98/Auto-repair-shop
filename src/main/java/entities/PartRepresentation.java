@@ -3,16 +3,16 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartView {
+public class PartRepresentation {
 
 
-    public static List<PartView> of(List<Part> alkatreszek){
+    public static List<PartRepresentation> of(List<Part> alkatreszek){
 
-        List<PartView> alkatreszNezetek = new ArrayList<>();
+        List<PartRepresentation> alkatreszNezetek = new ArrayList<>();
 
         for(Part part : alkatreszek){
 
-            alkatreszNezetek.add(new PartView(part));
+            alkatreszNezetek.add(new PartRepresentation(part));
 
         }
         return alkatreszNezetek;
@@ -29,7 +29,7 @@ public class PartView {
     private Integer alkatreszCikkszam;
 
     private Part part;
-    public PartView(String alkatreszNev, Integer alkatreszAr, Integer alkatreszGaranciaIdotartama) {
+    public PartRepresentation(String alkatreszNev, Integer alkatreszAr, Integer alkatreszGaranciaIdotartama) {
         this.alkatreszNev = alkatreszNev;
         this.alkatreszAr = alkatreszAr;
         this.alkatreszGaranciaIdotartama = alkatreszGaranciaIdotartama;
@@ -38,7 +38,7 @@ public class PartView {
     //Uj
 
 
-    public PartView(String alkatreszNev, Integer alkatreszAr, Integer alkatreszGaranciaIdotartama, Integer alkatreszCikkszam, Part part) {
+    public PartRepresentation(String alkatreszNev, Integer alkatreszAr, Integer alkatreszGaranciaIdotartama, Integer alkatreszCikkszam, Part part) {
         this.alkatreszNev = alkatreszNev;
         this.alkatreszAr = alkatreszAr;
         this.alkatreszGaranciaIdotartama = alkatreszGaranciaIdotartama;
@@ -47,7 +47,7 @@ public class PartView {
     }
 
     //Modositottam
-    public PartView(Part part) {
+    public PartRepresentation(Part part) {
         this.alkatreszNev = part.getNev();
         this.alkatreszAr = part.getAr();
         this.alkatreszGaranciaIdotartama = part.getGaranciaIdotartama();

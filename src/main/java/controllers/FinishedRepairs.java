@@ -22,10 +22,10 @@ import java.util.ResourceBundle;
 public class FinishedRepairs extends AutoRepairshopBasicController {
 
     @FXML private TableView<FinishedRepairsRepresentation> lezartSzerelesekTV;
-    @FXML private DatePicker tolDP;
-    @FXML private DatePicker igDP;
-    @FXML private Label bevetelL;
-    private TableManager<FinishedRepairsRepresentation> lezartSzerelesekTM;
+    @FXML private DatePicker fromDP;
+    @FXML private DatePicker toDP;
+    @FXML private Label incomeL;
+    private TableManager<FinishedRepairsRepresentation> finishedRepairsTM;
     private RepairDao repairDao = new RepairDao(EntityManagerCreator.getEntityManager());
 
     @Override
@@ -33,44 +33,44 @@ public class FinishedRepairs extends AutoRepairshopBasicController {
         super.initialize(location, resources);
         Logger.info("Lezárt szerelések.");
 
-        lezartSzerelesekTM = new TableManagerImpl<>(this.lezartSzerelesekTV);
-        Timestamp tol = Timestamp.valueOf(LocalDate.of(LocalDate.now().getYear(),1,1 ).atStartOfDay());
-        Timestamp ig = new Timestamp(System.currentTimeMillis());
+        finishedRepairsTM = new TableManagerImpl<>(this.lezartSzerelesekTV);
+        Timestamp from = Timestamp.valueOf(LocalDate.of(LocalDate.now().getYear(),1,1 ).atStartOfDay());
+        Timestamp to = new Timestamp(System.currentTimeMillis());
 
-        this.lezartSzerelesekTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getLezartSzerelesek(tol, ig)));
-        this.setBevetelL();
+        this.finishedRepairsTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getLezartSzerelesek(from, to)));
+        this.setIncomeL();
     }
 
-    public void keres(){
+    public void find(){
 
-        if(tolDP.getValue()!=null && igDP.getValue()!=null){
+        if(fromDP.getValue()!=null && toDP.getValue()!=null){
 
-            Timestamp tol = Timestamp.valueOf(tolDP.getValue().atStartOfDay());
-            Timestamp ig = Timestamp.valueOf(igDP.getValue().atStartOfDay());
+            Timestamp from = Timestamp.valueOf(fromDP.getValue().atStartOfDay());
+            Timestamp to = Timestamp.valueOf(toDP.getValue().atStartOfDay());
             Logger.info("keres");
-            this.lezartSzerelesekTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getLezartSzerelesek(tol, ig)));
-            this.setBevetelL();
+            this.finishedRepairsTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getLezartSzerelesek(from, to)));
+            this.setIncomeL();
 
         }
 
     }
 
-    private void setBevetelL(){
+    private void setIncomeL(){
 
-        List<FinishedRepairsRepresentation> lezartSzerelesNezetek = this.lezartSzerelesekTM.getJelenlegiEntitasok();
+        List<FinishedRepairsRepresentation> lezartSzerelesNezetek = this.finishedRepairsTM.getJelenlegiEntitasok();
 
         if(lezartSzerelesNezetek.size()>0) {
             lezartSzerelesNezetek.stream().map(c -> ((FinishedRepairsRepresentation) c).getAr())
-                    .reduce((a, b) -> (Integer) a + (Integer) b).ifPresent(c -> bevetelL.setText(c.toString() + " Ft"));
+                    .reduce((a, b) -> (Integer) a + (Integer) b).ifPresent(c -> incomeL.setText(c.toString() + " Ft"));
         }else {
-            bevetelL.setText("0 Ft");
+            incomeL.setText("0 Ft");
         }
     }
 
 
-    public void megtekintesPushed()throws IOException {
+    public void viewRepairPushed()throws IOException {
 
-        this.changeScene("SzerelesMegtekintese",this.lezartSzerelesekTM.getSelectedEntity().getRepair());
+        this.changeScene("SzerelesMegtekintese",this.finishedRepairsTM.getSelectedEntity().getRepair());
 
     }
 }

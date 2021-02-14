@@ -17,45 +17,45 @@ import java.util.ResourceBundle;
 
 public class OngoingRepairs extends AutoRepairshopBasicController {
 
-    @FXML private TableView<OngoingRepairsRepresentation> folyamatbanLevoSzerelesekTV;
+    @FXML private TableView<OngoingRepairsRepresentation> ongoingRepairsTV;
 
     private RepairDao repairDao = new RepairDao(EntityManagerCreator.getEntityManager());
 
 
-    private TableManager<OngoingRepairsRepresentation> folyamatbanLevoSzerelesekManager;
+    private TableManager<OngoingRepairsRepresentation> onGoingRepairsTM;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       folyamatbanLevoSzerelesekManager = new TableManagerImpl<>(this.folyamatbanLevoSzerelesekTV);
+       onGoingRepairsTM = new TableManagerImpl<>(this.ongoingRepairsTV);
 
-        List<Repair> folyamatbanLevoSzerelesek = this.repairDao.folyamatbanLevoSzerelesek();
+        List<Repair> ongoingRepairs = this.repairDao.folyamatbanLevoSzerelesek();
 
-        List<OngoingRepairsRepresentation> folyamatbanLevoSzerelesNezetek =
-                OngoingRepairsRepresentation.of(folyamatbanLevoSzerelesek);
+        List<OngoingRepairsRepresentation> ongoingRepairsRep =
+                OngoingRepairsRepresentation.of(ongoingRepairs);
 
-        Logger.info(folyamatbanLevoSzerelesek.size());
+        Logger.info(ongoingRepairs.size());
 
-        this.folyamatbanLevoSzerelesekManager.addEntity(folyamatbanLevoSzerelesNezetek);
+        this.onGoingRepairsTM.addEntity(ongoingRepairsRep);
 
     }
 
-    public void szerelesSzerkesztesereNavigal() throws IOException {
+    public void navToEditingRepair() throws IOException {
         Logger.info( "kivalasztott szereles id-ja");
-    Logger.info( this.getKivalasztottSzerelesEntity().getId());
-    szerelesSzerkesztesereNavigal("SzerelesSzerkesztese", this.getKivalasztottSzerelesEntity() );
+    Logger.info( this.getChosenRepairEntity().getId());
+    navToEditingRepair("SzerelesSzerkesztese", this.getChosenRepairEntity() );
     }
 
-    private void szerelesSzerkesztesereNavigal(String fxmlNev, Repair repair) throws IOException {
+    private void navToEditingRepair(String fxmlNev, Repair repair) throws IOException {
         this.changeScene(fxmlNev, repair);
 
 
     }
 
-    private Repair getKivalasztottSzerelesEntity(){
+    private Repair getChosenRepairEntity(){
 
-        return this.repairDao.getById(this.folyamatbanLevoSzerelesekManager.getSelectedItem().getId());
+        return this.repairDao.getById(this.onGoingRepairsTM.getSelectedItem().getId());
 
     }
 

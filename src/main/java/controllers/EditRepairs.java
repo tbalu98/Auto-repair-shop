@@ -23,177 +23,147 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * This is the controller of the scene where the user can edit the repair of the car.
+ * This class is responsible for fetching and displaying the data of the chosen repair
+ * so it extends the @link ViewRepairs class.
+ * This class is also responsible for presenting the UI for the user to edit the repair like
+ * adding new assemblies and parts, deleting, updating and finishing the edition of the repair.
+ */
+
+
 public class EditRepairs extends ViewRepairs {
 
 
-
+    /**
+     * These are the daos that are used for fetching, deleting and updating data from the database.
+     */
     private RepairDao repairDao = new RepairDao(EntityManagerCreator.getEntityManager());
-
     private HourlyRateAssemblyDao hourlyRateAssemblyDao = new HourlyRateAssemblyDao(EntityManagerCreator.getEntityManager());
     private AssemblyDao assemblyDao = new AssemblyDao(EntityManagerCreator.getEntityManager());
     private AssemblyTypeDao assemblyTypeDao = new AssemblyTypeDao(EntityManagerCreator.getEntityManager());
-
     private PartDao partDao = new PartDao(EntityManagerCreator.getEntityManager());
     private UsedPartsDao usedPartsDao = new UsedPartsDao(EntityManagerCreator.getEntityManager());
 
 
-    private List<UsedPart> kitorlendoFelhasznaltAlkatreszek = new ArrayList<>();
-    private List<Assembly> kitorlendoJavitasok = new ArrayList<>();
-    @FXML private TableView javitasokTV;
-    @FXML private TextArea leirasTA;
-    @FXML private TextField munkaorakSzamaTF;
-    @FXML private TextField javitasGaranciaIdotartamaTF;
-    @FXML private TextField fixArTF;
+    /**
+     * These lists contain the parts and assemblies that the user wants to delete
+     */
+    private List<UsedPart> usedPartsToBeDeleted = new ArrayList<>();
+    private List<Assembly> assembliesToBeDeleted = new ArrayList<>();
+
+
+    @FXML private TableView assembliesTV;
+    @FXML private TextArea descriptionTA;
+    @FXML private TextField numOfWorkingHoursTF;
+    @FXML private TextField guaranteeOfAssemblyTF;
+    @FXML private TextField fixedPriceTF;
 
 //    @FXML private TableView felhasznaltAlkatreszekTV;
-    @FXML private TextField nevTF;
-    @FXML private TextField arTF;
-    @FXML private TextField felhasznaltAlkatreszgaranciaIdotartamaTF;
-    @FXML private TextField cikkszamTF;
+    @FXML private TextField nameTF;
+    @FXML private TextField priceTF;
+    @FXML private TextField guaranteeOfUsedPartTF;
+    @FXML private TextField articleNumTF;
 
 
-    @FXML private TableView<PartView> alkatreszekTV;
+    @FXML private TableView<PartRepresentation> partsTV;
 
-    @FXML private TableView<AssemblyTypesRepresentation> javitasTipusokTV;
+    @FXML private TableView<AssemblyTypesRepresentation> assemblyTypesRepTV;
 
-    //private TableManager<FelhasznaltAlkatreszekNezet> felahasznaltAlkatreszekTM;
-    //private TableManager<JavitasokNezet> javitasokTM ;
-    private TableManager<AssemblyTypesRepresentation> javitasTipusTM;
-    private TableManager<PartView> alkatreszNezetTM;
+    private TableManager<AssemblyTypesRepresentation> assemblyTypeRepTM;
+    private TableManager<PartRepresentation> partRepTM;
 
-    private HourlyPricedAssemblyType kivalasztottJavitasTipus;
-    private Part kivalasztottPart;
+    private HourlyPricedAssemblyType chosenAssemblyType;
+    private Part chosenPart;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        this.felahasznaltAlkatreszekTM = new TableManagerImpl<>(this.felhasznaltAlkatreszekTV);
-        this.javitasokTM = new TableManagerImpl<>(this.javitasokTV);
-        this.javitasTipusTM = new TableManagerImpl<>(this.javitasTipusokTV);
-        this.alkatreszNezetTM = new TableManagerImpl<>(this.alkatreszekTV);
+        this.usedPartsRepTM = new TableManagerImpl<>(this.usedPartsTV);
+        this.assembliesRepTM = new TableManagerImpl<>(this.assembliesTV);
+        this.assemblyTypeRepTM = new TableManagerImpl<>(this.assemblyTypesRepTV);
+        this.partRepTM = new TableManagerImpl<>(this.partsTV);
 
     }
 
-/*
-    @Override
-    public void initData(Object o) {
-        Szereles szereles = (Szereles)o;
-        //Hibernate.initialize(szereles);
 
-        this.szereles = szereles;
+    public void addAssemblyPushed(){
 
-        //this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
-        this.javitasokTM.setEntitasok(JavitasokNezet.of(this.szereles.getJavitasok()));
-
-    }
-
-*/
-    /*private OradijasJavitasTipus ujOradijasJavitasTipusMentese(){
-        OradijasJavitasTipus oradijasJavitasTipus =
-                new OradijasJavitasTipus(this.leirasTA.getText(),Integer.parseInt(this.javitasGaranciaIdotartamaTF.getText()));
-        oradijasJavitasTipusDao.persist(oradijasJavitasTipus);
-        return oradijasJavitasTipus;
-
-    }*/
-
-
-
-// Javítás hozzáadása
-
-    public void javitastHozzaadPushed(){
-
-        if(this.kivalasztottJavitasTipus!=null){
-         this.javitastHozzaad();
+        if(this.chosenAssemblyType !=null){
+         this.addAssembly();
         }else{
-            this.nincsKivalasztottjavitasTipusFigyelmeztetes();
+            this.noChosenAssemblyTypeWarning();
         }
 
     }
 
-    private void javitastHozzaad(){
+    private void addAssembly(){
 
-        if(this.kivalasztottJavitasTipus instanceof FixPricedAssemblyType){
+        if(this.chosenAssemblyType instanceof FixPricedAssemblyType){
             FixPricedAssembly fixaruJavitas =
-                    this.ujFixaruJavitasMentese((FixPricedAssemblyType)this.kivalasztottJavitasTipus);
-            this.javitasokTM.addEntity(AssembliesRepresentation.of(fixaruJavitas));
+                    this.saveNewFixPricedRepair((FixPricedAssemblyType)this.chosenAssemblyType);
+            this.assembliesRepTM.addEntity(AssembliesRepresentation.of(fixaruJavitas));
             this.repair.getJavitasok().add(fixaruJavitas);
 
-            // kivett update
-            //this.szerelesDao.update(this.szereles);
+
 
         }
-        else if(this.kivalasztottJavitasTipus instanceof HourlyPricedAssemblyType){
-            HourlyPricedAssembly hourlyPricedAssembly = this.ujOradijasJavitasMentese(this.kivalasztottJavitasTipus);
+        else if(this.chosenAssemblyType instanceof HourlyPricedAssemblyType){
+            HourlyPricedAssembly hourlyPricedAssembly = this.saveNewHourlyRatedAssembly(this.chosenAssemblyType);
             this.repair.getJavitasok().add(hourlyPricedAssembly);
-            this.javitasokTM.addEntity(AssembliesRepresentation.of(hourlyPricedAssembly));
+            this.assembliesRepTM.addEntity(AssembliesRepresentation.of(hourlyPricedAssembly));
         }
 
 
     }
 
-    private HourlyPricedAssembly ujOradijasJavitasMentese(HourlyPricedAssemblyType hourlyPricedAssemblyType){
+    private HourlyPricedAssembly saveNewHourlyRatedAssembly(HourlyPricedAssemblyType hourlyPricedAssemblyType){
 
         HourlyPricedAssembly hourlyPricedAssembly =
-                new HourlyPricedAssembly(this.repair, hourlyPricedAssemblyType,Integer.parseInt(this.munkaorakSzamaTF.getText()));
+                new HourlyPricedAssembly(this.repair, hourlyPricedAssemblyType,Integer.parseInt(this.numOfWorkingHoursTF.getText()));
 
-        //kivett persist
-        //this.javitasDao.persist(oradijasJavitas);
         return hourlyPricedAssembly;
     }
 
 
-    private FixPricedAssembly ujFixaruJavitasMentese(FixPricedAssemblyType kivalasztottJavitasTipus) {
+    private FixPricedAssembly saveNewFixPricedRepair(FixPricedAssemblyType chosenAssemblyType) {
 
         FixPricedAssembly fixPricedAssembly =
-                new FixPricedAssembly(this.repair,kivalasztottJavitasTipus);
+                new FixPricedAssembly(this.repair,chosenAssemblyType);
 
-        //kivett persist
-        //this.javitasDao.persist(fixAruJavitas);
         return fixPricedAssembly;
 
     }
 
-    private void nincsKivalasztottjavitasTipusFigyelmeztetes() {
+    private void noChosenAssemblyTypeWarning() {
+
     }
 
 
-    // Új alkatrész mentése
 
-/*
-    public void alkatresztHozzaadPushed(){
+    public void addPartPushed() {
 
-        Alkatresz alkatresz = ujAlkatreszMentese();
-        Javitas javitas = this.javitasokTM.getSelectedEntity().getJavitas();
-        FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatresztHozzaad(alkatresz,javitas);
-        this.felahasznaltAlkatreszekTM.addEntity(new FelhasznaltAlkatreszekNezet(felhasznaltAlkatresz));
-        javitas.getFelhasznaltAlkatreszek().add(felhasznaltAlkatresz);
-
-
-    }*/
-
-    public void alkatresztHozzaadPushed() {
-
-        Part part =this.kivalasztottPart; //= ujAlkatreszMentese();
-        Assembly assembly = this.javitasokTM.getSelectedEntity().getAssembly();
-        UsedPart usedPart = this.felhasznaltAlkatresztHozzaad(part, assembly);
-        this.felahasznaltAlkatreszekTM.addEntity(new UsedPartsRepresentation(usedPart));
+        Part part =this.chosenPart; //= ujAlkatreszMentese();
+        Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
+        UsedPart usedPart = this.createUsedPart(part, assembly);
+        this.usedPartsRepTM.addEntity(new UsedPartsRepresentation(usedPart));
         assembly.getFelhasznaltAlkatreszek().add(usedPart);
 
 
     }
 
-    public Part ujAlkatreszMentese(){
+   // public Part ujAlkatreszMentese(){
 
-        Part part = new Part(this.nevTF.getText(), Integer.parseInt(this.arTF.getText()),
-                Integer.parseInt(this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText()));
+       // Part part = new Part(this.nameTF.getText(), Integer.parseInt(this.priceTF.getText()),
+      //          Integer.parseInt(this.guaranteeOfUsedPartTF.getText()));
 
         //kivett persist
         //this.alkatreszDao.persist(alkatresz);
-        return part;
-    }
+   //     return part;
+    //}
 
-    public UsedPart felhasznaltAlkatresztHozzaad(Part part, Assembly assembly){
+    public UsedPart createUsedPart(Part part, Assembly assembly){
 
         UsedPart usedPart = new UsedPart(part, assembly);
 
@@ -214,11 +184,11 @@ public class EditRepairs extends ViewRepairs {
 */
 
     // A kiválaszott javítás törlése
-    public void  javitasTorlesePushed(){
+    public void deleteAssemblyPushed(){
 
         //Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
 
-        Assembly assembly = this.javitasokTM.getSelectedEntity().getAssembly();
+        Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
         this.repair.getJavitasok().remove(assembly);
         Logger.info(repair.getJavitasok());
         //kivett remove
@@ -228,25 +198,25 @@ public class EditRepairs extends ViewRepairs {
         //this.szerelesDao.update(szereles);
         if(assembly.getId()!=null){
 
-            this.kitorlendoJavitasok.add(assembly);
+            this.assembliesToBeDeleted.add(assembly);
 
         }
 
-        this.javitasokTM.removeSelectedEntity();
-        this.javitasokTM.rerfreshTable();
-        this.felahasznaltAlkatreszekTM.removeAll();
+        this.assembliesRepTM.removeSelectedEntity();
+        this.assembliesRepTM.rerfreshTable();
+        this.usedPartsRepTM.removeAll();
     }
 
     // Alkatrész törlése
-    public void alkatreszTorlesePushed(){
+    public void deletePartPushed(){
         Logger.info("alkatresz torlese");
 
-        Logger.info(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId());
+        Logger.info(this.usedPartsRepTM.getSelectedEntity().getId());
         //Logger.info("az alkatresz:" +this.alkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId()));
 
         //FelhasznaltAlkatresz felhasznaltAlkatresz = this.felhasznaltAlkatreszDao.getById(this.felahasznaltAlkatreszekTM.getSelectedEntity().getId());
 
-        UsedPart usedPart = this.felahasznaltAlkatreszekTM.getSelectedEntity().getUsedPart();
+        UsedPart usedPart = this.usedPartsRepTM.getSelectedEntity().getUsedPart();
 
         Assembly assembly = usedPart.getAssembly();
 
@@ -258,20 +228,20 @@ public class EditRepairs extends ViewRepairs {
         //this.felhasznaltAlkatreszDao.remove(felhasznaltAlkatresz);
 
         if(usedPart.getId()!=null){
-            this.kitorlendoFelhasznaltAlkatreszek.add(usedPart);
+            this.usedPartsToBeDeleted.add(usedPart);
             //this.felhasznaltAlkatreszDao.remove(this.felhasznaltAlkatreszDao.getById(felhasznaltAlkatresz.getId()));
         }
 
-        this.felahasznaltAlkatreszekTM.removeSelectedEntity();
-        this.felahasznaltAlkatreszekTM.rerfreshTable();
+        this.usedPartsRepTM.removeSelectedEntity();
+        this.usedPartsRepTM.rerfreshTable();
 
         //kivett update
         //javitasDao.update(javitas);
     }
 
     // Javítás keresése
-    public void javitasTipustKeresPushed(){
-        AssemblyTypeFilter assemblyTypeFilter = this.javitasTipusFilterLetrehozasa();
+    public void findAssemblyTypePushed(){
+        AssemblyTypeFilter assemblyTypeFilter = this.createAssemblyTypeFilter();
 
 
         List javitasTipusok;
@@ -285,17 +255,17 @@ public class EditRepairs extends ViewRepairs {
 
         //javitasTipusok.addAll(javitasTipusok);
         Logger.info(AssemblyTypesRepresentation.of(javitasTipusok));
-        this.javitasTipusTM.setEntitasok(AssemblyTypesRepresentation.of(javitasTipusok));
+        this.assemblyTypeRepTM.setEntitasok(AssemblyTypesRepresentation.of(javitasTipusok));
 
     }
 
-    public AssemblyTypeFilter javitasTipusFilterLetrehozasa(){
+    public AssemblyTypeFilter createAssemblyTypeFilter(){
 
         AssemblyTypeFilter assemblyTypeFilter = new AssemblyTypeFilter();
         assemblyTypeFilter.setId(null);
-        assemblyTypeFilter.setLeiras(this.leirasTA.getText());
-        String fixar = this.fixArTF.getText();
-        String garanciaIdotartama = this.javitasGaranciaIdotartamaTF.getText();
+        assemblyTypeFilter.setLeiras(this.descriptionTA.getText());
+        String fixar = this.fixedPriceTF.getText();
+        String garanciaIdotartama = this.guaranteeOfAssemblyTF.getText();
         Logger.info(fixar + "  -----  " + garanciaIdotartama);
         if(!fixar.equals("")){
             assemblyTypeFilter.setFixar(Integer.parseInt(fixar));
@@ -308,27 +278,27 @@ public class EditRepairs extends ViewRepairs {
         return assemblyTypeFilter;
     }
 
-    public void javitasTipustValaszt(){
+    public void choseAssemblyType(){
 
-        HourlyPricedAssemblyType hourlyPricedAssemblyType =  this.assemblyTypeDao.getById(this.javitasTipusTM.getSelectedEntity().getId());
-        this.leirasTA.setText(hourlyPricedAssemblyType.getLeiras());
+        HourlyPricedAssemblyType hourlyPricedAssemblyType =  this.assemblyTypeDao.getById(this.assemblyTypeRepTM.getSelectedEntity().getId());
+        this.descriptionTA.setText(hourlyPricedAssemblyType.getLeiras());
         if(hourlyPricedAssemblyType instanceof FixPricedAssemblyType){
-            this.fixArTF.setText(((FixPricedAssemblyType) hourlyPricedAssemblyType).getAr().toString());
+            this.fixedPriceTF.setText(((FixPricedAssemblyType) hourlyPricedAssemblyType).getAr().toString());
         }
-        this.javitasGaranciaIdotartamaTF.setText(hourlyPricedAssemblyType.getGaranciaIdotartama()!=null ?
+        this.guaranteeOfAssemblyTF.setText(hourlyPricedAssemblyType.getGaranciaIdotartama()!=null ?
                 hourlyPricedAssemblyType.getGaranciaIdotartama().toString(): "");
 
-        this.kivalasztottJavitasTipus = hourlyPricedAssemblyType;
+        this.chosenAssemblyType = hourlyPricedAssemblyType;
     }
 
-    public void modositasokMentesePushed(){
+    public void savePushed(){
 
         Logger.info(repair.getJavitasok());
         this.repairDao.update(repair);
 
-        this.assemblyDao.removeAll(this.kitorlendoJavitasok.stream().map(j->j.getId()).collect(Collectors.toList()));
+        this.assemblyDao.removeAll(this.assembliesToBeDeleted.stream().map(j->j.getId()).collect(Collectors.toList()));
 
-        this.usedPartsDao.removeAll(this.kitorlendoFelhasznaltAlkatreszek.stream().map(j->j.getId()).collect(Collectors.toList()));
+        this.usedPartsDao.removeAll(this.usedPartsToBeDeleted.stream().map(j->j.getId()).collect(Collectors.toList()));
 
         Logger.info("javitas excetion");
         this.assemblyDao.remove(new HourlyPricedAssembly());
@@ -336,7 +306,7 @@ public class EditRepairs extends ViewRepairs {
 
     }
 
-    public void szerelestLezarPushed(){
+    public void finishRepairPushed(){
 
   /*      this.szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
         this.szerelesDao.update(szereles);
@@ -363,48 +333,48 @@ public class EditRepairs extends ViewRepairs {
 
     //------------------------------------------------------------------------------------------------------------
 
-    public void alkatresztKeresPush(){
+    public void findPartPushed(){
 
-        PartFilter partFilter = this.alkatreszFiltertLetrehoz();
+        PartFilter partFilter = this.createPartFilter();
 
-        alkatreszNezetTM.setEntitasok( PartView.of(this.partDao.find(partFilter)));
-
-    }
-
-
-    private PartFilter alkatreszFiltertLetrehoz(){
-
-        String nev = this.nevTF.getText();
-        String garanciaIdotartama = this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText();
-        String ar = this.arTF.getText();
-
-        return new PartFilter(nev,ar,garanciaIdotartama,this.cikkszamTF.getText());
+        partRepTM.setEntitasok( PartRepresentation.of(this.partDao.find(partFilter)));
 
     }
 
-    public void ujAlkatreszPushed(){
 
-        Part part = this.alkatresztLetrehoz();
-        Assembly assembly = this.javitasokTM.getSelectedEntity().getAssembly();
-        UsedPart usedPart = this.felhasznaltAlkatresztHozzaad(part, assembly);
-        this.felahasznaltAlkatreszekTM.addEntity(new UsedPartsRepresentation(usedPart));
+    private PartFilter createPartFilter(){
+
+        String name = this.nameTF.getText();
+        String guarantee = this.guaranteeOfUsedPartTF.getText();
+        String price = this.priceTF.getText();
+
+        return new PartFilter(name,price,guarantee,this.articleNumTF.getText());
+
+    }
+
+    public void newPartPushed(){
+
+        Part part = this.createPart();
+        Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
+        UsedPart usedPart = this.createUsedPart(part, assembly);
+        this.usedPartsRepTM.addEntity(new UsedPartsRepresentation(usedPart));
         assembly.getFelhasznaltAlkatreszek().add(usedPart);
 
     }
 
-    private Part alkatresztLetrehoz() {
-        return new Part(this.nevTF.getText(),Integer.parseInt(this.arTF.getText()),
-                Integer.parseInt(this.felhasznaltAlkatreszgaranciaIdotartamaTF.getText()),Integer.parseInt(this.cikkszamTF.getText()));
+    private Part createPart() {
+        return new Part(this.nameTF.getText(),Integer.parseInt(this.priceTF.getText()),
+                Integer.parseInt(this.guaranteeOfUsedPartTF.getText()),Integer.parseInt(this.articleNumTF.getText()));
     }
 
-    public void alkatresztKivalasztPushed(){
+    public void chosePartPushed(){
 
 
-        Part part = this.alkatreszNezetTM.getSelectedEntity().getPart();
-        this.kivalasztottPart = part;
-        this.nevTF.setText(part.getNev());
-        this.felhasznaltAlkatreszgaranciaIdotartamaTF.setText(part.getGaranciaIdotartama().toString());
-        this.arTF.setText(part.getAr().toString());
+        Part part = this.partRepTM.getSelectedEntity().getPart();
+        this.chosenPart = part;
+        this.nameTF.setText(part.getNev());
+        this.guaranteeOfUsedPartTF.setText(part.getGaranciaIdotartama().toString());
+        this.priceTF.setText(part.getAr().toString());
 
 
     }

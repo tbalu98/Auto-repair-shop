@@ -23,18 +23,18 @@ public class ViewRepairs extends AutoRepairShopBasicControllerWithInitData {
 
     //@FXML private TableView felhasznaltAlkatreszekTV;
 
-    @FXML protected TableView felhasznaltAlkatreszekTV;
-    @FXML protected Label nevL;
-    @FXML protected Label lakcimL;
-    @FXML protected Label telefonszamL;
-    @FXML protected Label tipusL;
-    @FXML protected Label motorTerfogataL;
-    @FXML protected Label teljesitmenyL;
-    @FXML protected Label evjaratL;
-    @FXML protected Label vizsgaLejartaL;
+    @FXML protected TableView usedPartsTV;
+    @FXML protected Label nameL;
+    @FXML protected Label addressL;
+    @FXML protected Label telephoneNumberL;
+    @FXML protected Label typeL;
+    @FXML protected Label volumeOfEngineL;
+    @FXML protected Label powerL;
+    @FXML protected Label yearL;
+    @FXML protected Label expirationDateL;
 
-    protected TableManager<UsedPartsRepresentation> felahasznaltAlkatreszekTM;
-    protected TableManager<AssembliesRepresentation> javitasokTM ;
+    protected TableManager<UsedPartsRepresentation> usedPartsRepTM;
+    protected TableManager<AssembliesRepresentation> assembliesRepTM;
 
     
 
@@ -47,12 +47,12 @@ public class ViewRepairs extends AutoRepairShopBasicControllerWithInitData {
 
         Logger.info(this.repair.getJavitasok());
 
-        this.setLableek();
+        this.setLabels();
 
         //this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
         //Logger.info(JavitasokNezet.of(this.szereles.getJavitasok()));
         List<AssembliesRepresentation> javitasokNezetek = AssembliesRepresentation.of(this.repair.getJavitasok());
-        this.javitasokTM.setEntitasok(AssembliesRepresentation.of(this.repair.getJavitasok()));
+        this.assembliesRepTM.setEntitasok(AssembliesRepresentation.of(this.repair.getJavitasok()));
 
     }
 
@@ -71,35 +71,35 @@ public class ViewRepairs extends AutoRepairShopBasicControllerWithInitData {
 
     }
 */
-  protected void setLableek() {
+  protected void setLabels() {
 
-      this.nevL.setText(this.repair.getUgyfelNev());
-      this.lakcimL.setText(this.repair.getUgyfelLakcim());
-      this.telefonszamL.setText(this.repair.getUgyfelTelefonszam());
+      this.nameL.setText(this.repair.getUgyfelNev());
+      this.addressL.setText(this.repair.getUgyfelLakcim());
+      this.telephoneNumberL.setText(this.repair.getUgyfelTelefonszam());
 
-      this.tipusL.setText(this.repair.getGepjarmuTipus());
-      this.motorTerfogataL.setText(this.repair.getGepjarmuMotorTerfogat().toString());
-      this.teljesitmenyL.setText(this.repair.getGepjarmuTeljesitmeny().toString());
+      this.typeL.setText(this.repair.getGepjarmuTipus());
+      this.volumeOfEngineL.setText(this.repair.getGepjarmuMotorTerfogat().toString());
+      this.powerL.setText(this.repair.getGepjarmuTeljesitmeny().toString());
 
-      this.evjaratL.setText(this.repair.getGepjarmuEvjarat().toString());
-      this.vizsgaLejartaL.setText(this.repair.getGepjarmuVizsgaLejarta().toString());
+      this.yearL.setText(this.repair.getGepjarmuEvjarat().toString());
+      this.expirationDateL.setText(this.repair.getGepjarmuVizsgaLejarta().toString());
 
-      this.motorTerfogataL.setText(this.repair.getCar().getGepjarmuParameter().getMotorterfogat().toString());
+      this.volumeOfEngineL.setText(this.repair.getCar().getGepjarmuParameter().getMotorterfogat().toString());
   }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        this.felahasznaltAlkatreszekTM = new TableManagerImpl<>(this.felhasznaltAlkatreszekTV);
-        this.javitasokTM = new TableManagerImpl<>(this.javitasokTV);
+        this.usedPartsRepTM = new TableManagerImpl<>(this.usedPartsTV);
+        this.assembliesRepTM = new TableManagerImpl<>(this.javitasokTV);
 
     }
 
-    public void felhasznaltAlkatreszeinekMegjelenitesePushed(){
+    public void displayUsedPartsPushed(){
 
         //Javitas javitas = this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
-        Assembly assembly = this.javitasokTM.getSelectedEntity().getAssembly();
+        Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
         Logger.info(assembly.getId());
         Logger.info(assembly.getFelhasznaltAlkatreszek().size());
         for(UsedPart usedPart : assembly.getFelhasznaltAlkatreszek()){
@@ -112,7 +112,7 @@ public class ViewRepairs extends AutoRepairShopBasicControllerWithInitData {
 
         }
 
-        this.felahasznaltAlkatreszekTM.setEntitasok(UsedPartsRepresentation.of(assembly.getFelhasznaltAlkatreszek()));
+        this.usedPartsRepTM.setEntitasok(UsedPartsRepresentation.of(assembly.getFelhasznaltAlkatreszek()));
 
     }
 

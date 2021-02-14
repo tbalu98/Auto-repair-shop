@@ -34,7 +34,7 @@
       <contextMenu>
         <ContextMenu>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#megtekintesPushed" text="View" />
+            <MenuItem mnemonicParsing="false" onAction="#viewRepairPushed" text="View" />
           </items>
         </ContextMenu>
       </contextMenu>
@@ -43,11 +43,11 @@
       <children>
         <Label text="Repair" />
         <Label text=" until" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <DatePicker fx:id="tolDP" GridPane.columnIndex="1" />
-        <DatePicker fx:id="igDP" onAction="#keres" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <DatePicker fx:id="fromDP" GridPane.columnIndex="1" />
+        <DatePicker fx:id="toDP" onAction="#find" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text=" from" GridPane.columnIndex="2" />
         <Label text="Income" GridPane.columnIndex="3" />
-        <Label fx:id="bevetelL" text="0" GridPane.columnIndex="4" />
+        <Label fx:id="incomeL" text="0" GridPane.columnIndex="4" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

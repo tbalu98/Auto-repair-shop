@@ -15,9 +15,9 @@
             <Label text="Telephone number:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label text="Adress:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <Label text="Owner" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label fx:id="nevL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="telefonszamL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="lakcimL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="nameL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="telephoneNumberL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="addressL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,9 +36,9 @@
             <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label text="Volume of the engine:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <Label text="Power:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Label fx:id="tipusL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="motorTerfogataL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="teljesitmenyL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="typeL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="volumeOfEngineL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="powerL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="156.0" />
@@ -56,8 +56,8 @@
             <Label text="Auto's further parameters:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label text="Year:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label text="Traffic license expires:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label fx:id="evjaratL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="vizsgaLejartaL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="yearL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="expirationDateL" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="177.0" />
@@ -92,7 +92,7 @@
                   <contextMenu>
                     <ContextMenu>
                       <items>
-                        <MenuItem mnemonicParsing="false" onAction="#felhasznaltAlkatreszeinekMegjelenitesePushed" text="Alkatrészei" />
+                        <MenuItem mnemonicParsing="false" onAction="#displayUsedPartsPushed" text="Alkatrészei" />
                       </items>
                     </ContextMenu>
                   </contextMenu>
@@ -113,7 +113,7 @@
             </HBox>
             <HBox prefHeight="314.0" prefWidth="700.0">
               <children>
-                <TableView fx:id="felhasznaltAlkatreszekTV" maxWidth="700.0" minWidth="700.0" prefHeight="314.0" prefWidth="700.0">
+                <TableView fx:id="usedPartsTV" maxWidth="700.0" minWidth="700.0" prefHeight="314.0" prefWidth="700.0">
                   <columns>
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="337.0" text="Name" fx:id="nevOszlop" />
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Price" fx:id="arOszlop" />

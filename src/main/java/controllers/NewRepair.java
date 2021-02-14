@@ -23,26 +23,26 @@ public class NewRepair extends AutoRepairshopBasicController {
     private AutoParameterDao autoParameterDao = new AutoParameterDao(EntityManagerCreator.getEntityManager());
 
     //@FXML private TextField nevTextField;
-    @FXML private TextField telefonszamTF;
-    @FXML private TextField lakcimTF;
-    @FXML private TextField nevTF;
+    @FXML private TextField telephoneNumberTF;
+    @FXML private TextField addressTF;
+    @FXML private TextField nameTF;
 
-    @FXML private TextField tipusTF;
-    @FXML private TextField motorTerfogataTF;
-    @FXML private TextField teljesitmenyTF;
+    @FXML private TextField typeTF;
+    @FXML private TextField volumeOfEngineTF;
+    @FXML private TextField powerTF;
 
-    @FXML private TextField evjaratTF;
-    @FXML private DatePicker vizsgaLejartaDP;
-    @FXML private TextField alvazszamTF;
+    @FXML private TextField yearTF;
+    @FXML private DatePicker expirationDataDP;
+    @FXML private TextField vehicleIdentificationNumberTF;
 
-    @FXML private TableView<Customer> ugyfelTV;
-    @FXML private TableView<CarParameter> gepjarmuparameterTV;
-    @FXML private TableView<AutoRepresentation> teljesGepjarmuTV;
+    @FXML private TableView<Customer> customerTV;
+    @FXML private TableView<CarParameter> carParameterTV;
+    @FXML private TableView<AutoRepresentation> carRepresentationTV;
 
 
-    private TableManager<Customer> ugyfelTM;
-    private TableManager<CarParameter> gepjarmuparameterTM;
-    private TableManager<AutoRepresentation> teljesGepjarmuNezetTM;
+    private TableManager<Customer> customerTM;
+    private TableManager<CarParameter> carParameterTM;
+    private TableManager<AutoRepresentation> carRepTM;
 
 
     //öröklött
@@ -53,32 +53,32 @@ public class NewRepair extends AutoRepairshopBasicController {
     private Car car;
     private Repair repair;
     private CarParameter carParameter;
-    private String nincsElegAdatHibaTitle = "";
-    private String nincsElegAdatHibaHeader = "";
-    private String nincsElegAdatContentText = "";
+    private String notEnoughDataTitle = "";
+    private String notEnoughDataHeader = "";
+    private String notEnoughDataContentText = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        this.ugyfelTM = new TableManagerImpl<>(this.ugyfelTV);
-        this.gepjarmuparameterTM = new TableManagerImpl<>(this.gepjarmuparameterTV);
-        this.teljesGepjarmuNezetTM = new TableManagerImpl<>(this.teljesGepjarmuTV);
+        this.customerTM = new TableManagerImpl<>(this.customerTV);
+        this.carParameterTM = new TableManagerImpl<>(this.carParameterTV);
+        this.carRepTM = new TableManagerImpl<>(this.carRepresentationTV);
 
 
     }
 
-    private Customer ujUgyfelletrehozasa(){
+    private Customer createNewCustomer(){
 
-        Customer customer =  new Customer(this.nevTF.getText(), this.telefonszamTF.getText(),this.lakcimTF.getText());
+        Customer customer =  new Customer(this.nameTF.getText(), this.telephoneNumberTF.getText(),this.addressTF.getText());
         //this.ugyfel = ugyfel;
 
         return customer;
 
     }
 
-    private void ujUgyfelMentese(){
+    private void saveNewCustomer(){
 
-        Customer customer = this.ujUgyfelletrehozasa();
+        Customer customer = this.createNewCustomer();
 
        //kivett persist
        // this.ugyfelDao.persist(ugyfel);
@@ -86,12 +86,12 @@ public class NewRepair extends AutoRepairshopBasicController {
 
     }
 
-    public void ujUgyfeletFelveszPushed(){
+    public void addNewCustomerPushed(){
 
-        Logger.info(this.ugyfelTFekKitolteseHelyes());
-        if(!this.ugyfelTFekKitolteseHelyes()){
+        Logger.info(this.customerTFsFilledCorrect());
+        if(!this.customerTFsFilledCorrect()){
             Logger.info("hiba");
-            this.showErrorMessage("Hiba történt","Az ügyfél mezők hibásan vannak kitöltve", "Tanács...");
+            this.showErrorMessage("ERROR","The text fields for customer's data was not filled correctly", "advice...");
             /*Alert alert = new Alert(Alert.AlertType.ERROR);
          alert.setTitle("Hiba történt");
          alert.setHeaderText("Az ügyfél mezők hibásan vannak kitöltve!");
@@ -102,98 +102,99 @@ public class NewRepair extends AutoRepairshopBasicController {
         }
         else {
             Logger.info("elseben");
-            ujUgyfelMentese();
+            saveNewCustomer();
         }
     }
 /* TODO string null  "" helyett */
-    private boolean ugyfelTFekKitolteseHelyes() {
-        Logger.info("+"+this.nevTF.getText()+"+");
-            return !this.nevTF.getText().equals("") && !this.lakcimTF.getText().equals("") && !this.telefonszamTF.getText().equals("");
+    private boolean customerTFsFilledCorrect() {
+        Logger.info("+"+this.nameTF.getText()+"+");
+            return !this.nameTF.getText().equals("") && !this.addressTF.getText().equals("") && !this.telephoneNumberTF.getText().equals("");
     }
 
 
-    public void ujGepjarmuPushed(){
+    public void newCarPushed(){
 
         if(this.carParameter !=null) {
-            this.car = new Car(this.carParameter, Integer.parseInt(this.alvazszamTF.getText()),
-                    this.vizsgaLejartaDP.getValue(), Integer.parseInt(this.evjaratTF.getText()));
+            this.car = new Car(this.carParameter, Integer.parseInt(this.vehicleIdentificationNumberTF.getText()),
+                    this.expirationDataDP.getValue(), Integer.parseInt(this.yearTF.getText()));
         }
         else{
 
-            this.nincsKivalasztottGepjarmuparameter();
+            this.noChosenCarParameter();
 
         }
 
 
     }
 
-    private void nincsKivalasztottGepjarmuparameter() {
+    private void noChosenCarParameter() {
 
 
     }
 
     /*TODO beletenni ezt a kódrészletet a dolgozatomba*/
-    public void szerelesInditasaPushed(){
+    public void startRepairPushed(){
 
         Logger.info("Szerelés indítása pushed------");
-        this.feltetelesenSzerelestMent();
-        this.ujSzereleshezElokeszul();
+        this.saveRepair();
+        this.prepareForNewRepair();
 
     }
 
-    private void feltetelesenSzerelestMent() {
-        if(this.vanRogzitettAdatSzerelesInditasahoz()){
+    //feltételesen szerelést ment
+    private void saveRepair() {
+        if(this.enoughDataForSavingRepair()){
 
-            this.szerelesEsEntitasinakMentese();
+            this.saveRepairAndItsEntities();
 
         }
         else{
-            this.nincsElegAdatASzerelesInditasahozHiba();
+            this.notEnoughDataForSavingRepair();
         }
 
     }
 
 
-    private void nincsElegAdatASzerelesInditasahozHiba() {
-        this.showErrorMessage(this.nincsElegAdatHibaTitle, this.nincsElegAdatHibaHeader, this.nincsElegAdatContentText);
+    private void notEnoughDataForSavingRepair() {
+        this.showErrorMessage(this.notEnoughDataTitle, this.notEnoughDataHeader, this.notEnoughDataContentText);
         Logger.info("valami hiányzik");
     }
 
-    private boolean vanRogzitettAdatSzerelesInditasahoz(){
+    private boolean enoughDataForSavingRepair(){
 
         return this.car !=null && this.customer != null;
 
     }
 
-    private void ujSzereleshezElokeszul() {
+    private void prepareForNewRepair() {
 
-        this.regiSzerelesAdataitTorol();
-        this.textFieldekTartalmatTorol();
-        this.tablakTartalmatTorol();
+        this.deleteDataOfRepair();
+        this.deleteContentOfTextFields();
+        this.deleteContentOfTables();
     }
 
-    private void tablakTartalmatTorol() {
-        this.gepjarmuparameterTM.removeAll();
-        this.teljesGepjarmuNezetTM.removeAll();
-        this.ugyfelTM.removeAll();
+    private void deleteContentOfTables() {
+        this.carParameterTM.removeAll();
+        this.carRepTM.removeAll();
+        this.customerTM.removeAll();
     }
 
-    private void textFieldekTartalmatTorol() {
+    private void deleteContentOfTextFields() {
 
-        this.motorTerfogataTF.setText("");
-        this.teljesitmenyTF.setText("");
-        this.tipusTF.setText("");
-        this.alvazszamTF.setText("");
-        this.evjaratTF.setText("");
-        this.vizsgaLejartaDP.setChronology(null);
+        this.volumeOfEngineTF.setText("");
+        this.powerTF.setText("");
+        this.typeTF.setText("");
+        this.vehicleIdentificationNumberTF.setText("");
+        this.yearTF.setText("");
+        this.expirationDataDP.setChronology(null);
 
-        this.lakcimTF.setText("");
-        this.nevTF.setText("");
-        this.telefonszamTF.setText("");
+        this.addressTF.setText("");
+        this.nameTF.setText("");
+        this.telephoneNumberTF.setText("");
 
     }
 
-    private void regiSzerelesAdataitTorol() {
+    private void deleteDataOfRepair() {
 
         this.carParameter = null;
         this.car = null;
@@ -201,14 +202,14 @@ public class NewRepair extends AutoRepairshopBasicController {
 
     }
 
-    private void szerelesEsEntitasinakMentese(){
+    private void saveRepairAndItsEntities(){
 
-        this.szereleshezTartozoEntitasokMentese();
-        this.szerelesMentese();
+        this.saveRepairsEntity();
+        this.saveRepairToDB();
     }
 
     /* TODO ellenőrizni mert új függvény*/
-    private void szereleshezTartozoEntitasokMentese() {
+    private void saveRepairsEntity() {
 
         this.customerDao.saveOrUpdate(this.customer);
         this.autoParameterDao.saveOrUpdate(this.carParameter);
@@ -216,7 +217,7 @@ public class NewRepair extends AutoRepairshopBasicController {
 
     }
 
-    private void szerelesMentese() {
+    private void saveRepairToDB() {
         Repair repair = new Repair(this.car,this.customer);
         this.repairDao.persist(repair);
 
@@ -224,96 +225,96 @@ public class NewRepair extends AutoRepairshopBasicController {
 
 
 
-    public void ugyfeltKeresPushed(){
+    public void findCustomerPushed(){
 
 
-        Logger.info(this.ugyfeletLetrehoz());
-        this.ugyfelTM.setEntitasok(this.customerDao.find(this.ugyfeletLetrehoz()));
+        Logger.info(this.createCustomer());
+        this.customerTM.setEntitasok(this.customerDao.find(this.createCustomer()));
 
 
     }
 
 
 
-    private Customer ugyfeletLetrehoz() {
+    private Customer createCustomer() {
 
-        return new Customer(this.nevTF.getText(),this.telefonszamTF.getText(),this.lakcimTF.getText());
-
-    }
-
-    public void ujGepjarmuparameterFelvetelPushed(){
-
-        this.carParameter = new CarParameter(this.tipusTF.getText(),
-                Integer.parseInt(this.motorTerfogataTF.getText()),Integer.parseInt(this.teljesitmenyTF.getText()));
+        return new Customer(this.nameTF.getText(),this.telephoneNumberTF.getText(),this.addressTF.getText());
 
     }
 
+    public void newCarParameterPushed(){
 
-    public void gepjarmuParameterreKeresPushed(){
-        Logger.info(this.gepjarmuvetLetrehoz());
-        this.gepjarmuparameterTM.setEntitasok(this.autoParameterDao.find(this.gepjarmuparametertLetrehoz()));
-
-    }
-
-    private CarParameter gepjarmuparametertLetrehoz() {
-        return new CarParameter(this.tipusTF.getText(),this.motorTerfogataTF.getText().equals("")?null:Integer.parseInt(this.motorTerfogataTF.getText()),
-                this.teljesitmenyTF.getText().equals("")?null:Integer.parseInt(this.telefonszamTF.getText()));
-    }
-
-    public void gepjarmureKeresPushed(){
-
-
-        this.teljesGepjarmuNezetTM.setEntitasok(AutoRepresentation.of(this.autoDao.find(this.gepjarmuvetLetrehoz())));
+        this.carParameter = new CarParameter(this.typeTF.getText(),
+                Integer.parseInt(this.volumeOfEngineTF.getText()),Integer.parseInt(this.powerTF.getText()));
 
     }
 
-    private Car gepjarmuvetLetrehoz() {
 
-        return new Car(null,!this.alvazszamTF.getText().equals("")?Integer.parseInt(this.alvazszamTF.getText()):null,this.vizsgaLejartaDP.getValue(),
-                this.evjaratTF.getText().equals("")?null:Integer.parseInt(this.evjaratTF.getText()));
+    public void findCarParameterPushed(){
+        Logger.info(this.createCar());
+        this.carParameterTM.setEntitasok(this.autoParameterDao.find(this.createCarParameter()));
 
     }
 
-    public void gepjarmuParametertKivalasztPushed(){
-        this.carParameter = this.gepjarmuparameterTM.getSelectedEntity();
-        this.gepjarmuparameterTFekKitoltese();
+    private CarParameter createCarParameter() {
+        return new CarParameter(this.typeTF.getText(),this.volumeOfEngineTF.getText().equals("")?null:Integer.parseInt(this.volumeOfEngineTF.getText()),
+                this.powerTF.getText().equals("")?null:Integer.parseInt(this.telephoneNumberTF.getText()));
     }
 
-    private void gepjarmuparameterTFekKitoltese() {
+    public void findCarPushed(){
+
+
+        this.carRepTM.setEntitasok(AutoRepresentation.of(this.autoDao.find(this.createCar())));
+
+    }
+
+    private Car createCar() {
+
+        return new Car(null,!this.vehicleIdentificationNumberTF.getText().equals("")?Integer.parseInt(this.vehicleIdentificationNumberTF.getText()):null,this.expirationDataDP.getValue(),
+                this.yearTF.getText().equals("")?null:Integer.parseInt(this.yearTF.getText()));
+
+    }
+
+    public void choseCarParameterPushed(){
+        this.carParameter = this.carParameterTM.getSelectedEntity();
+        this.setCarParameterTFs();
+    }
+
+    private void setCarParameterTFs() {
         if(this.carParameter !=null){
-            this.tipusTF.setText(this.carParameter.getTipus());
-            this.motorTerfogataTF.setText(this.carParameter.getMotorterfogat().toString());
-            this.teljesitmenyTF.setText(this.carParameter.getTeljesitmeny().toString());
+            this.typeTF.setText(this.carParameter.getTipus());
+            this.volumeOfEngineTF.setText(this.carParameter.getMotorterfogat().toString());
+            this.powerTF.setText(this.carParameter.getTeljesitmeny().toString());
         }
     }
 
-    public void ugyfeletKivalasztPushed(){
-        this.customer = this.ugyfelTM.getSelectedEntity();
-        this.ugyfelTFekKitoltese();
+    public void choseCustomerPushed(){
+        this.customer = this.customerTM.getSelectedEntity();
+        this.setCustomerTFs();
     }
 
-    private void ugyfelTFekKitoltese() {
+    private void setCustomerTFs() {
         if(this.customer != null){
-            this.nevTF.setText(this.customer.getNev());
-            this.telefonszamTF.setText(this.customer.getTelefonszam());
-            this.lakcimTF.setText(this.customer.getLakcim());
+            this.nameTF.setText(this.customer.getNev());
+            this.telephoneNumberTF.setText(this.customer.getTelefonszam());
+            this.addressTF.setText(this.customer.getLakcim());
         }
     }
 
 
-    public void gepjarmuvetKivalasztPushed(){
+    public void choseCarPushed(){
         //demeter törvényének megsértése
-        this.carParameter = this.teljesGepjarmuNezetTM.getSelectedEntity().getCar().getGepjarmuParameter();
-        this.car = this.teljesGepjarmuNezetTM.getSelectedEntity().getCar();
-        this.gepjarmuparameterTFekKitoltese();
-        this.gepjarmuTFekKitoltese();
+        this.carParameter = this.carRepTM.getSelectedEntity().getCar().getGepjarmuParameter();
+        this.car = this.carRepTM.getSelectedEntity().getCar();
+        this.setCarParameterTFs();
+        this.setCarTFs();
     }
 
-    private void gepjarmuTFekKitoltese() {
+    private void setCarTFs() {
         if(this.car !=null) {
-            this.alvazszamTF.setText(this.car.getAlvazszam().toString());
-            this.evjaratTF.setText(this.car.getEvjarat().toString());
-            this.vizsgaLejartaDP.setValue(this.car.getVizsgaLejarta());
+            this.vehicleIdentificationNumberTF.setText(this.car.getAlvazszam().toString());
+            this.yearTF.setText(this.car.getEvjarat().toString());
+            this.expirationDataDP.setValue(this.car.getVizsgaLejarta());
         }
     }
 

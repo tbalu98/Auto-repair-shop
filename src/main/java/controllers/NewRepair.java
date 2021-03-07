@@ -7,7 +7,7 @@ import entities.Customer;
 import entities.Repair;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import representations.AutoRepresentation;
+import representations.CarRepresentation;
 import org.pmw.tinylog.Logger;
 import utils.TableManagerImpl;
 import utils.TableManager;
@@ -15,10 +15,10 @@ import utils.TableManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NewRepair extends AutoRepairshopBasicController {
+public class NewRepair extends CarRepairshopBasicController {
 
     private CustomerDao customerDao = new CustomerDao(EntityManagerCreator.getEntityManager());
-    private AutoDao autoDao = new AutoDao(EntityManagerCreator.getEntityManager());
+    private CarDao carDao = new CarDao(EntityManagerCreator.getEntityManager());
     private RepairDao repairDao = new RepairDao(EntityManagerCreator.getEntityManager());
     private AutoParameterDao autoParameterDao = new AutoParameterDao(EntityManagerCreator.getEntityManager());
 
@@ -37,12 +37,12 @@ public class NewRepair extends AutoRepairshopBasicController {
 
     @FXML private TableView<Customer> customerTV;
     @FXML private TableView<CarParameter> carParameterTV;
-    @FXML private TableView<AutoRepresentation> carRepresentationTV;
+    @FXML private TableView<CarRepresentation> carRepresentationTV;
 
 
     private TableManager<Customer> customerTM;
     private TableManager<CarParameter> carParameterTM;
-    private TableManager<AutoRepresentation> carRepTM;
+    private TableManager<CarRepresentation> carRepTM;
 
 
     //öröklött
@@ -213,7 +213,7 @@ public class NewRepair extends AutoRepairshopBasicController {
 
         this.customerDao.saveOrUpdate(this.customer);
         this.autoParameterDao.saveOrUpdate(this.carParameter);
-        this.autoDao.saveOrUpdate(this.car);
+        this.carDao.saveOrUpdate(this.car);
 
     }
 
@@ -264,7 +264,7 @@ public class NewRepair extends AutoRepairshopBasicController {
     public void findCarPushed(){
 
 
-        this.carRepTM.setEntitasok(AutoRepresentation.of(this.autoDao.find(this.createCar())));
+        this.carRepTM.setEntitasok(CarRepresentation.of(this.carDao.find(this.createCar())));
 
     }
 

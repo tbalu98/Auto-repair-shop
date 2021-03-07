@@ -8,9 +8,9 @@ import entities.QGepjarmu;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class AutoDao extends BasicDao<Car> {
+public class CarDao extends BasicDao<Car> {
 
-    public AutoDao(EntityManager entityManager){
+    public CarDao(EntityManager entityManager){
         super(Car.class);
         this.em = entityManager;
     }

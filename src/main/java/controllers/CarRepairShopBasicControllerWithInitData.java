@@ -12,7 +12,7 @@ import java.io.IOException;
  * On every scene you can switch to other scenes like to the Ongoing repairs scene, New repair, New assembly type
  * and finished repairs.
  */
-public abstract class AutoRepairShopBasicControllerWithInitData extends BasicControllerWithInitData {
+public abstract class CarRepairShopBasicControllerWithInitData extends BasicControllerWithInitData {
     @FXML
     protected MenuBar menuBar;
 

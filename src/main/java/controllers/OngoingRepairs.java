@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class OngoingRepairs extends AutoRepairshopBasicController {
+public class OngoingRepairs extends CarRepairshopBasicController {
 
     @FXML private TableView<OngoingRepairsRepresentation> ongoingRepairsTV;
 

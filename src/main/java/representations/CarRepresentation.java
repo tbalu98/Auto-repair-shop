@@ -8,15 +8,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoRepresentation {
+public class CarRepresentation {
 
 
-    public static List<AutoRepresentation> of(List<Car> gepjarmuvek){
+    public static List<CarRepresentation> of(List<Car> gepjarmuvek){
 
-        List<AutoRepresentation> teljesGepjarmuNezetek = new ArrayList<>();
+        List<CarRepresentation> teljesGepjarmuNezetek = new ArrayList<>();
         for(Car car : gepjarmuvek){
 
-            teljesGepjarmuNezetek.add(new AutoRepresentation(car));
+            teljesGepjarmuNezetek.add(new CarRepresentation(car));
 
         }
 
@@ -41,7 +41,7 @@ public class AutoRepresentation {
     private Car car;
 
 
-    public AutoRepresentation(Car car){
+    public CarRepresentation(Car car){
         this.alvazszam = car.getAlvazszam();
         this.vizsgaLejarta = car.getVizsgaLejarta();
         this.evjarat = car.getEvjarat();
@@ -52,8 +52,8 @@ public class AutoRepresentation {
 
     }
 
-    public AutoRepresentation(CarParameter carParameter, Integer alvazszam, LocalDate vizsgaLejarta, Integer evjarat,
-                              String ptipus, Integer pmotorterfogat, Integer pteljesitmeny) {
+    public CarRepresentation(CarParameter carParameter, Integer alvazszam, LocalDate vizsgaLejarta, Integer evjarat,
+                             String ptipus, Integer pmotorterfogat, Integer pteljesitmeny) {
 
         this.alvazszam = alvazszam;
         this.vizsgaLejarta = vizsgaLejarta;

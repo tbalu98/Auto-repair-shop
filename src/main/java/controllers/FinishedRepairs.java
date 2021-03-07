@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FinishedRepairs extends AutoRepairshopBasicController {
+public class FinishedRepairs extends CarRepairshopBasicController {
 
     @FXML private TableView<FinishedRepairsRepresentation> lezartSzerelesekTV;
     @FXML private DatePicker fromDP;

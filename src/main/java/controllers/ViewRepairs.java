@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ViewRepairs extends AutoRepairShopBasicControllerWithInitData {
+public class ViewRepairs extends CarRepairShopBasicControllerWithInitData {
 
 
     protected Repair repair;

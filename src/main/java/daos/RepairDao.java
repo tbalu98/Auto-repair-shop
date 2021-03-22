@@ -1,7 +1,7 @@
 package daos;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import entities.QSzereles;
+import entities.QRepair;
 import entities.Repair;
 
 import javax.persistence.EntityManager;
@@ -17,23 +17,23 @@ public class RepairDao extends BasicDao<Repair> {
 
         public List<Repair> folyamatbanLevoSzerelesek(){
             JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-            QSzereles qSzereles = QSzereles.szereles;
-            return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.isNull()).fetch();
+            QRepair qRepair = QRepair.repair;
+            return queryFactory.selectFrom(qRepair).where(qRepair.endOfRepair.isNull()).fetch();
     }
 
     public List<Repair> getLezartSzerelesek() {
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QSzereles qSzereles = QSzereles.szereles;
-        return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.isNotNull()).fetch();
+        QRepair qRepair = QRepair.repair;
+        return queryFactory.selectFrom(qRepair).where(qRepair.endOfRepair.isNotNull()).fetch();
 
     }
 
     public List<Repair> getLezartSzerelesek(Timestamp tol, Timestamp ig) {
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QSzereles qSzereles = QSzereles.szereles;
-        return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.between(tol,ig)).fetch();
+        QRepair qRepair = QRepair.repair;
+        return queryFactory.selectFrom(qRepair).where(qRepair.endOfRepair.between(tol,ig)).fetch();
 
     }
 }

@@ -71,7 +71,7 @@ public class NewRepairType extends BasicController{
 
         HourlyPricedAssemblyType hourlyPricedAssemblyType = this.assemblyTypeDao.getById(this.assemblyTypeTM.getSelectedEntity().getId());
 
-        if(hourlyPricedAssemblyType.getJavitasok().isEmpty()){
+        if(hourlyPricedAssemblyType.getAssemblies().isEmpty()){
 
             this.assemblyTypeDao.remove(hourlyPricedAssemblyType);
             this.assemblyTypeTM.removeSelectedEntity();

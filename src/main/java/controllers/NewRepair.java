@@ -282,9 +282,9 @@ public class NewRepair extends CarRepairshopBasicController {
 
     private void setCarParameterTFs() {
         if(this.carParameter !=null){
-            this.typeTF.setText(this.carParameter.getTipus());
-            this.volumeOfEngineTF.setText(this.carParameter.getMotorterfogat().toString());
-            this.powerTF.setText(this.carParameter.getTeljesitmeny().toString());
+            this.typeTF.setText(this.carParameter.getType());
+            this.volumeOfEngineTF.setText(this.carParameter.getEngineVolume().toString());
+            this.powerTF.setText(this.carParameter.getPower().toString());
         }
     }
 
@@ -295,9 +295,9 @@ public class NewRepair extends CarRepairshopBasicController {
 
     private void setCustomerTFs() {
         if(this.customer != null){
-            this.nameTF.setText(this.customer.getNev());
-            this.telephoneNumberTF.setText(this.customer.getTelefonszam());
-            this.addressTF.setText(this.customer.getLakcim());
+            this.nameTF.setText(this.customer.getName());
+            this.telephoneNumberTF.setText(this.customer.getTelephoneNumber());
+            this.addressTF.setText(this.customer.getAddress());
         }
     }
 
@@ -312,9 +312,9 @@ public class NewRepair extends CarRepairshopBasicController {
 
     private void setCarTFs() {
         if(this.car !=null) {
-            this.vehicleIdentificationNumberTF.setText(this.car.getAlvazszam().toString());
-            this.yearTF.setText(this.car.getEvjarat().toString());
-            this.expirationDataDP.setValue(this.car.getVizsgaLejarta());
+            this.vehicleIdentificationNumberTF.setText(this.car.getVehicleIdentificationNumber().toString());
+            this.yearTF.setText(this.car.getYear().toString());
+            this.expirationDataDP.setValue(this.car.getExpirationDate());
         }
     }
 

@@ -3,7 +3,7 @@ package daos;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import entities.*;
-import entities.QGepjarmu;
+import entities.QCar;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -17,18 +17,18 @@ public class CarDao extends BasicDao<Car> {
 
     public List<Car> find(Car carFilter){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QGepjarmu qGepjarmu = QGepjarmu.gepjarmu;
-        JPAQuery<Car> query = queryFactory.selectFrom(qGepjarmu);
+        QCar qCar = QCar.car;
+        JPAQuery<Car> query = queryFactory.selectFrom(qCar);
 
-        if(carFilter.getAlvazszam()!=null){
+        if(carFilter.getVehicleIdentificationNumber()!=null){
 
-            query.where(qGepjarmu.alvazszam.eq(carFilter.getAlvazszam()));
+            query.where(qCar.vehicleIdentificationNumber.eq(carFilter.getVehicleIdentificationNumber()));
 
         }
 
-        if(carFilter.getEvjarat()!=null){
+        if(carFilter.getYear()!=null){
 
-            query.where(qGepjarmu.evjarat.eq(carFilter.getEvjarat()));
+            query.where(qCar.year.eq(carFilter.getYear()));
 
         }
 

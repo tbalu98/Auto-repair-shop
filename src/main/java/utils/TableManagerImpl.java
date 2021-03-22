@@ -26,8 +26,9 @@ public class TableManagerImpl<E> implements TableManager<E> {
     @Override
     public void setEntitasok(List entities) {
 
-            Logger.info("Íme a tábla: " + this.tabla.getItems());
+        Logger.info("entities" + entities);
             this.tabla.setItems(FXCollections.observableArrayList(entities));
+        Logger.info("Íme a tábla: " + this.tabla.getItems());
 
     }
 

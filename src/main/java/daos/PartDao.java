@@ -3,7 +3,7 @@ package daos;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import entities.Part;
-import entities.QAlkatresz;
+import entities.QPart;
 import filters.PartFilter;
 import org.pmw.tinylog.Logger;
 
@@ -20,24 +20,24 @@ public  class PartDao extends BasicDao<Part> {
     public List<Part> find(PartFilter filter){
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QAlkatresz qAlkatresz = QAlkatresz.alkatresz;
+        QPart qPart = QPart.part;
 
-        JPAQuery<Part> query = queryFactory.selectFrom(qAlkatresz);
+        JPAQuery<Part> query = queryFactory.selectFrom(qPart);
 
         if(filter.getCikkszam()!=null){
 
-            query.where(qAlkatresz.cikkszam.eq(filter.getCikkszam()));
+            query.where(qPart.partCode.eq(filter.getCikkszam()));
 
         }
         if(filter.getAr()!=null){
-            query.where(qAlkatresz.ar.eq(filter.getAr()));
+            query.where(qPart.price.eq(filter.getAr()));
         }
         if(filter.getGaranciaIdotartama()!=null){
-            query.where(qAlkatresz.garanciaIdotartama.eq(filter.getGaranciaIdotartama()));
+            query.where(qPart.guarantee.eq(filter.getGaranciaIdotartama()));
         }
         Logger.info(filter.getGaranciaIdotartama());
         if(!filter.getNev().equals("")){
-            query.where(qAlkatresz.nev.eq(filter.getNev()));
+            query.where(qPart.name.eq(filter.getNev()));
         }
         return query.fetch();
 

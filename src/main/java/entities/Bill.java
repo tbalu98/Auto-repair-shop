@@ -9,7 +9,7 @@ public abstract class Bill {
 
     Integer aratSzamol(){
         Integer res;
-        return this.javitasok.stream().map(c -> c.aratSzamol()).reduce((a,b) -> a +b).get();
+        return this.javitasok.stream().map(c -> c.computePrice()).reduce((a, b) -> a +b).get();
     }
 
 }

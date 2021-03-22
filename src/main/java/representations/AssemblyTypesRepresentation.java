@@ -35,17 +35,17 @@ public class AssemblyTypesRepresentation {
     public AssemblyTypesRepresentation(FixPricedAssemblyType fixPricedAssemblyType){
         this.hourlyPricedAssemblyType = fixPricedAssemblyType;
         this.id = fixPricedAssemblyType.getId();
-        this.leiras = fixPricedAssemblyType.getLeiras();
-        this.fixar = fixPricedAssemblyType.getAr();
-        this.garanciaIdotartama = fixPricedAssemblyType.getGaranciaIdotartama();
+        this.leiras = fixPricedAssemblyType.getDecription();
+        this.fixar = fixPricedAssemblyType.getPrice();
+        this.garanciaIdotartama = fixPricedAssemblyType.getGuarantee();
 
     }
 
     public AssemblyTypesRepresentation(HourlyPricedAssemblyType hourlyPricedAssemblyType){
 
         this.id = hourlyPricedAssemblyType.getId();
-        this.leiras = hourlyPricedAssemblyType.getLeiras();
-        this.garanciaIdotartama = hourlyPricedAssemblyType.getGaranciaIdotartama();
+        this.leiras = hourlyPricedAssemblyType.getDecription();
+        this.garanciaIdotartama = hourlyPricedAssemblyType.getGuarantee();
 
     }
 

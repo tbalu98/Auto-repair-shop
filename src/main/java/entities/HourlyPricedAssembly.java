@@ -15,27 +15,27 @@ public class HourlyPricedAssembly extends Assembly {
     private HourlyPricedAssemblyType hourlyPricedAssemblyType;
 
     @Column(name = "munkaorak_szama")
-    private Integer munkaOrakSzama;
+    private Integer numofWorkingHours;
 
     public HourlyPricedAssembly(){}
 
-    public HourlyPricedAssembly(Repair repair, HourlyPricedAssemblyType hourlyPricedAssemblyType, Integer munkaOrakSzama) {
+    public HourlyPricedAssembly(Repair repair, HourlyPricedAssemblyType hourlyPricedAssemblyType, Integer numofWorkingHours) {
         this.repair = repair;
         this.hourlyPricedAssemblyType = hourlyPricedAssemblyType;
-        this.munkaOrakSzama = munkaOrakSzama;
+        this.numofWorkingHours = numofWorkingHours;
     }
 
     @Override
-    public Integer aratSzamol() {
+    public Integer computePrice() {
 
-        Integer ar = this.alkatreszekAra();
-        ar += this.munkaKoltsege();
-        return ar;
+        Integer price = this.priceofParts();
+        price += this.priceOfWork();
+        return price;
     }
 
-    private Integer munkaKoltsege(){
-        if(munkaOrakSzama!=null)
-        return this.munkaOrakSzama* HourlyPricedAssembly.oradij;
+    private Integer priceOfWork(){
+        if(numofWorkingHours !=null)
+        return this.numofWorkingHours * HourlyPricedAssembly.oradij;
         else
             return 0;
     }
@@ -48,12 +48,12 @@ public class HourlyPricedAssembly extends Assembly {
         this.hourlyPricedAssemblyType = hourlyPricedAssemblyType;
     }
 
-    public Integer getMunkaOrakSzama() {
-        return munkaOrakSzama;
+    public Integer getNumofWorkingHours() {
+        return numofWorkingHours;
     }
 
-    public void setMunkaOrakSzama(Integer munkaOrakSzama) {
-        this.munkaOrakSzama = munkaOrakSzama;
+    public void setNumofWorkingHours(Integer numofWorkingHours) {
+        this.numofWorkingHours = numofWorkingHours;
     }
 
     public static void setOradij(Integer ujOraDij){
@@ -62,11 +62,12 @@ public class HourlyPricedAssembly extends Assembly {
 
     @Override
     public String toString() {
-        return "OradijasJavitas{" +
-                "oradijasJavitasTipus=" + hourlyPricedAssemblyType +
-                ", munkaOrakSzama=" + munkaOrakSzama +
+        return "HourlyPricedAssembly{" +
+                "hourlyPricedAssemblyType=" + hourlyPricedAssemblyType +
+                ", numofWorkingHours=" + numofWorkingHours +
                 ", id=" + id +
-                ", felhasznaltAlkatreszek=" + felhasznaltAlkatreszek +
+                ", usedParts=" + usedParts.size() +
+                ", repair=" + repair +
                 '}';
     }
 }

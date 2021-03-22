@@ -33,10 +33,10 @@ public class UsedPartsRepresentation {
         this.usedPart = usedPart;
         this.id = usedPart.getId();
         // DEMETER TORVENYENEK MEGSERTESE
-        this.nev = usedPart.getPart().getNev();
-        this.ar = usedPart.getPart().getAr();
-        this.garanciaIdotartama = usedPart.getPart().getGaranciaIdotartama();
-        this.cikkszam = usedPart.getCikkszam();
+        this.nev = usedPart.getPart().getName();
+        this.ar = usedPart.getPart().getPrice();
+        this.garanciaIdotartama = usedPart.getPart().getGuarantee();
+        this.cikkszam = usedPart.getPartCode();
     }
 
     public Integer getId() {

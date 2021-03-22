@@ -18,20 +18,20 @@ public class HourlyPricedAssemblyType {
     private Integer id;
 
     @Column(name = "leiras")
-    private String leiras;
+    private String decription;
 
     @Column(name = "garancia_idotartama_")
-    private Integer garanciaIdotartama;
+    private Integer guarantee;
 
     @OneToMany(mappedBy = "hourlyPricedAssemblyType", fetch = FetchType.LAZY)
-    private List<HourlyPricedAssembly> javitasok = new ArrayList<>();
+    private List<HourlyPricedAssembly> assemblies = new ArrayList<>();
 
     public HourlyPricedAssemblyType(){}
 
-    public HourlyPricedAssemblyType(String leiras, Integer garanciaIdotartama) {
+    public HourlyPricedAssemblyType(String decription, Integer guarantee) {
 
-        this.leiras = leiras;
-        this.garanciaIdotartama = garanciaIdotartama;
+        this.decription = decription;
+        this.guarantee = guarantee;
 
     }
 
@@ -43,27 +43,27 @@ public class HourlyPricedAssemblyType {
         this.id = id;
     }
 
-    public String getLeiras() {
-        return leiras;
+    public String getDecription() {
+        return decription;
     }
 
-    public void setLeiras(String leiras) {
-        this.leiras = leiras;
+    public void setDecription(String decription) {
+        this.decription = decription;
     }
 
-    public Integer getGaranciaIdotartama() {
-        return garanciaIdotartama;
+    public Integer getGuarantee() {
+        return guarantee;
     }
 
-    public void setGaranciaIdotartama(Integer garanciaIdotartama) {
-        this.garanciaIdotartama = garanciaIdotartama;
+    public void setGuarantee(Integer guarantee) {
+        this.guarantee = guarantee;
     }
 
-    public List<HourlyPricedAssembly> getJavitasok() {
-        return javitasok;
+    public List<HourlyPricedAssembly> getAssemblies() {
+        return assemblies;
     }
 
-    public void setJavitasok(List<HourlyPricedAssembly> javitasok) {
-        this.javitasok = javitasok;
+    public void setAssemblies(List<HourlyPricedAssembly> assemblies) {
+        this.assemblies = assemblies;
     }
 }

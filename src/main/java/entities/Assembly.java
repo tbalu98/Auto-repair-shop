@@ -17,7 +17,7 @@ public abstract class Assembly implements hasPrice {
 
     //javitas volt
     @OneToMany(cascade = CascadeType.MERGE,mappedBy = "assembly", fetch = FetchType.EAGER)
-    protected List<UsedPart> felhasznaltAlkatreszek = new ArrayList<>();
+    protected List<UsedPart> usedParts = new ArrayList<>();
 
   /*  @ManyToMany()
     @JoinTable(
@@ -39,9 +39,9 @@ public abstract class Assembly implements hasPrice {
 */
     public Assembly() {}
 
-    public Assembly(String leiras, List<UsedPart> felhasznaltAlkatreszek, Repair repair) {
+    public Assembly(String leiras, List<UsedPart> usedParts, Repair repair) {
 
-        this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
+        this.usedParts = usedParts;
         this.repair = repair;
     }
 
@@ -68,12 +68,12 @@ public abstract class Assembly implements hasPrice {
         this.szerelok = szerelok;
     }
 */
-    public List<UsedPart> getFelhasznaltAlkatreszek() {
-        return felhasznaltAlkatreszek;
+    public List<UsedPart> getUsedParts() {
+        return usedParts;
     }
 
-    public void setFelhasznaltAlkatreszek(List<UsedPart> felhasznaltAlkatreszek) {
-        this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
+    public void setUsedParts(List<UsedPart> usedParts) {
+        this.usedParts = usedParts;
     }
 
     public Repair getRepair() {
@@ -85,25 +85,25 @@ public abstract class Assembly implements hasPrice {
     }
 
 
-    public abstract Integer aratSzamol();
+    public abstract Integer computePrice();
 
-    protected Integer alkatreszekAra(){
+    protected Integer priceofParts(){
 
-        Integer ar = new Integer(0);
+        Integer price = new Integer(0);
 
-        for(UsedPart alkatresz : this.getFelhasznaltAlkatreszek()){
+        for(UsedPart usedPart : this.getUsedParts()){
 
-            ar += alkatresz.getAr();
+            price += usedPart.getPrice();
 
         }
-        return ar;
+        return price;
 
     }
 
     public List<Object> getFelhasznaltAlkatreszekIdei(){
 
         List<Object> idk = new ArrayList<>();
-        for(UsedPart usedPart : this.felhasznaltAlkatreszek){
+        for(UsedPart usedPart : this.usedParts){
 
             idk.add((Object) usedPart.getId());
 

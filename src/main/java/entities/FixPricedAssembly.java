@@ -18,10 +18,10 @@ public class FixPricedAssembly extends Assembly {
         this.fixPricedAssemblyType = fixPricedAssemblyType;
     }
 
-    /* TODO Demeter törvénye*/
+
     @Override
-    public Integer aratSzamol() {
-         return this.alkatreszekAra() + this.getFixPricedAssemblyType().getAr();
+    public Integer computePrice() {
+         return this.priceofParts() + this.getFixPricedAssemblyType().getPrice();
     }
 
 

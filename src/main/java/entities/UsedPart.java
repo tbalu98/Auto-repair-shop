@@ -53,12 +53,12 @@ public class UsedPart implements Serializable  {
         this.part = part;
     }
 
-    public Integer getCikkszam() {
-        return this.part.getCikkszam();
+    public Integer getPartCode() {
+        return this.part.getPartCode();
     }
 
     public void setCikkszam(Integer cikkszam) {
-        this.part.setCikkszam(cikkszam);
+        this.part.setPartCode(cikkszam);
     }
 
     public Assembly getAssembly() {
@@ -69,16 +69,15 @@ public class UsedPart implements Serializable  {
         this.assembly = assembly;
     }
 
-    public Integer getAr() {
-        return this.part.getAr();
+    public Integer getPrice() {
+        return this.part.getPrice();
     }
 
     @Override
     public String toString() {
-        return "FelhasznaltAlkatresz{" +
+        return "UsedPart{" +
                 "id=" + id +
-                ", alkatresz=" + part.getNev() +
-                ", javitas=" + assembly.getId() +
+                ", part=" + part + /* assembly was there*/
                 '}';
     }
 }

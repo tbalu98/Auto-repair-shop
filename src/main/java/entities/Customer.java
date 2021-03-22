@@ -11,18 +11,18 @@ public class Customer {
     private Integer id;
 
     @Column(name = "telefonszam")
-    private String telefonszam;
+    private String telephoneNumber;
 
     @Column(name = "nev")
-    private String nev;
+    private String name;
 
     @Column(name = "lakcim")
-    private String lakcim;
+    private String address;
 
-    public Customer(String nev, String telefonszam, String lakcim) {
-        this.telefonszam = telefonszam;
-        this.nev = nev;
-        this.lakcim = lakcim;
+    public Customer(String name, String telephoneNumber, String address) {
+        this.telephoneNumber = telephoneNumber;
+        this.name = name;
+        this.address = address;
     }
 
     public Customer(){}
@@ -35,37 +35,37 @@ public class Customer {
         this.id = id;
     }
 
-    public String getTelefonszam() {
-        return telefonszam;
+    public String getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public void setTelefonszam(String telefonszam) {
-        this.telefonszam = telefonszam;
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 
-    public String getNev() {
-        return nev;
+    public String getName() {
+        return name;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLakcim() {
-        return lakcim;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLakcim(String lakcim) {
-        this.lakcim = lakcim;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
-        return "Ugyfel{" +
+        return "Customer{" +
                 "id=" + id +
-                ", telefonszam='" + telefonszam + '\'' +
-                ", nev='" + nev + '\'' +
-                ", lakcim='" + lakcim + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

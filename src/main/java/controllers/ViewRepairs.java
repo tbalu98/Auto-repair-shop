@@ -45,14 +45,14 @@ public class ViewRepairs extends CarRepairShopBasicControllerWithInitData {
 
         this.repair = repair;
 
-        Logger.info(this.repair.getJavitasok());
+        Logger.info(this.repair.getAssemblies());
 
         this.setLabels();
 
         //this.javitasokTM.setEntitasok(JavitasokNezet.of(this.javitasDao.findAll(this.szereles.getJavitasokIdk())));
         //Logger.info(JavitasokNezet.of(this.szereles.getJavitasok()));
-        List<AssembliesRepresentation> javitasokNezetek = AssembliesRepresentation.of(this.repair.getJavitasok());
-        this.assembliesRepTM.setEntitasok(AssembliesRepresentation.of(this.repair.getJavitasok()));
+        List<AssembliesRepresentation> javitasokNezetek = AssembliesRepresentation.of(this.repair.getAssemblies());
+        this.assembliesRepTM.setEntitasok(AssembliesRepresentation.of(this.repair.getAssemblies()));
 
     }
 
@@ -73,18 +73,18 @@ public class ViewRepairs extends CarRepairShopBasicControllerWithInitData {
 */
   protected void setLabels() {
 
-      this.nameL.setText(this.repair.getUgyfelNev());
-      this.addressL.setText(this.repair.getUgyfelLakcim());
-      this.telephoneNumberL.setText(this.repair.getUgyfelTelefonszam());
+      this.nameL.setText(this.repair.getCustomerName());
+      this.addressL.setText(this.repair.getCustomerAddress());
+      this.telephoneNumberL.setText(this.repair.getCustomerTelephoneNumber());
 
-      this.typeL.setText(this.repair.getGepjarmuTipus());
-      this.volumeOfEngineL.setText(this.repair.getGepjarmuMotorTerfogat().toString());
-      this.powerL.setText(this.repair.getGepjarmuTeljesitmeny().toString());
+      this.typeL.setText(this.repair.getCarType());
+      this.volumeOfEngineL.setText(this.repair.getVolumeOfEngine().toString());
+      this.powerL.setText(this.repair.getCarPower().toString());
 
-      this.yearL.setText(this.repair.getGepjarmuEvjarat().toString());
-      this.expirationDateL.setText(this.repair.getGepjarmuVizsgaLejarta().toString());
+      this.yearL.setText(this.repair.getYearOfCar().toString());
+      this.expirationDateL.setText(this.repair.getExpirationDate().toString());
 
-      this.volumeOfEngineL.setText(this.repair.getCar().getGepjarmuParameter().getMotorterfogat().toString());
+      this.volumeOfEngineL.setText(this.repair.getCar().getGepjarmuParameter().getEngineVolume().toString());
   }
 
     @Override
@@ -101,18 +101,18 @@ public class ViewRepairs extends CarRepairShopBasicControllerWithInitData {
         //Javitas javitas = this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
         Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
         Logger.info(assembly.getId());
-        Logger.info(assembly.getFelhasznaltAlkatreszek().size());
-        for(UsedPart usedPart : assembly.getFelhasznaltAlkatreszek()){
+        Logger.info(assembly.getUsedParts().size());
+        for(UsedPart usedPart : assembly.getUsedParts()){
             Logger.info(usedPart.toString());
         }
 
-        for(UsedPartsRepresentation usedPartsRepresentation : UsedPartsRepresentation.of(assembly.getFelhasznaltAlkatreszek())){
+        for(UsedPartsRepresentation usedPartsRepresentation : UsedPartsRepresentation.of(assembly.getUsedParts())){
 
             Logger.info(usedPartsRepresentation.toString());
 
         }
 
-        this.usedPartsRepTM.setEntitasok(UsedPartsRepresentation.of(assembly.getFelhasznaltAlkatreszek()));
+        this.usedPartsRepTM.setEntitasok(UsedPartsRepresentation.of(assembly.getUsedParts()));
 
     }
 

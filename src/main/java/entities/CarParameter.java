@@ -1,8 +1,6 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "gepjarmuparameter")
 public class CarParameter {
@@ -12,13 +10,13 @@ public class CarParameter {
     private Integer id;
 
     @Column(name = "tipus")
-    private String tipus;
+    private String type;
 
     @Column(name = "motorterfogat")
-    private Integer motorterfogat;
+    private Integer engineVolume;
 
     @Column(name = "teljesitmeny")
-    private Integer teljesitmeny;
+    private Integer power;
 
 /*
     @OneToMany(mappedBy = "gepjarmuparameter", fetch = FetchType.LAZY)
@@ -26,10 +24,10 @@ public class CarParameter {
 */
     public CarParameter(){}
 
-    public CarParameter(String tipus, Integer motorterfogat, Integer teljesitmeny) {
-        this.tipus = tipus;
-        this.motorterfogat = motorterfogat;
-        this.teljesitmeny = teljesitmeny;
+    public CarParameter(String type, Integer engineVolume, Integer power) {
+        this.type = type;
+        this.engineVolume = engineVolume;
+        this.power = power;
     }
 
     public Integer getId() {
@@ -40,28 +38,28 @@ public class CarParameter {
         this.id = id;
     }
 
-    public String getTipus() {
-        return tipus;
+    public String getType() {
+        return type;
     }
 
-    public void setTipus(String tipus) {
-        this.tipus = tipus;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Integer getMotorterfogat() {
-        return motorterfogat;
+    public Integer getEngineVolume() {
+        return engineVolume;
     }
 
-    public void setMotorterfogat(Integer motorterfogat) {
-        this.motorterfogat = motorterfogat;
+    public void setEngineVolume(Integer engineVolume) {
+        this.engineVolume = engineVolume;
     }
 
-    public Integer getTeljesitmeny() {
-        return teljesitmeny;
+    public Integer getPower() {
+        return power;
     }
 
-    public void setTeljesitmeny(Integer teljesitmeny) {
-        this.teljesitmeny = teljesitmeny;
+    public void setPower(Integer power) {
+        this.power = power;
     }
 /*
     public List<Gepjarmu> getGepjarmuvek() {
@@ -72,13 +70,14 @@ public class CarParameter {
         this.gepjarmuvek = gepjarmuvek;
     }
 */
+
     @Override
     public String toString() {
-        return "Gepjarmuparameter{" +
+        return "CarParameter{" +
                 "id=" + id +
-                ", tipus='" + tipus + '\'' +
-                ", motorterfogat=" + motorterfogat +
-                ", teljesitmeny=" + teljesitmeny +
+                ", type='" + type + '\'' +
+                ", engineVolume=" + engineVolume +
+                ", power=" + power +
                 '}';
     }
 }

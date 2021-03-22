@@ -39,21 +39,21 @@ public class OngoingRepairsRepresentation {
 
 
         this.id = repair.getId();
-        this.nev = customer.getNev();
-        this.telefonszam = customer.getTelefonszam();
-        this.szerelesKezdete = repair.getSzerelesKezdete();
-        this.tipus = car.getTipus();
+        this.nev = customer.getName();
+        this.telefonszam = customer.getTelephoneNumber();
+        this.szerelesKezdete = repair.getStartOfRepair();
+        this.tipus = car.getType();
 
     }
 
     public OngoingRepairsRepresentation(Repair repair){
 
         this.id = repair.getId();
-        this.nev = repair.getCustomer().getNev();
-        this.telefonszam = repair.getCustomer().getTelefonszam();
-        this.szerelesKezdete = repair.getSzerelesKezdete();
+        this.nev = repair.getCustomer().getName();
+        this.telefonszam = repair.getCustomer().getTelephoneNumber();
+        this.szerelesKezdete = repair.getStartOfRepair();
         //demeter torvenye
-        this.tipus = repair.getCar().getTipus();
+        this.tipus = repair.getCar().getType();
 
     }
 

@@ -17,17 +17,17 @@ public class Car {
     private CarParameter gepjarmuParameter;
 
     @Column(name = "alvazszam")
-    private Integer alvazszam;
+    private Integer vehicleIdentificationNumber;
 
     @Column(name = "vizsga_lejarta")
-    private LocalDate vizsgaLejarta;
+    private LocalDate expirationDate;
 
     @Column(name =  "evjarat")
-    private Integer evjarat;
+    private Integer year;
 
     //gepjarmu volt
     @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
-    private List<Repair> szerelesek = new ArrayList<>();
+    private List<Repair> repairs = new ArrayList<>();
 
     public Car(){
         Logger.info("Noarg gepjarmu");
@@ -35,11 +35,11 @@ public class Car {
 
 
 
-    public Car(CarParameter gepjarmuParameter, Integer alvazszam, LocalDate vizsgaLejarta, Integer evjarat) {
+    public Car(CarParameter gepjarmuParameter, Integer vehicleIdentificationNumber, LocalDate expirationDate, Integer year) {
         this.gepjarmuParameter = gepjarmuParameter;
-        this.alvazszam = alvazszam;
-        this.vizsgaLejarta = vizsgaLejarta;
-        this.evjarat = evjarat;
+        this.vehicleIdentificationNumber = vehicleIdentificationNumber;
+        this.expirationDate = expirationDate;
+        this.year = year;
     }
 
     public Integer getId() {
@@ -50,12 +50,12 @@ public class Car {
         this.id = id;
     }
 
-    public List<Repair> getSzerelesek() {
-        return szerelesek;
+    public List<Repair> getRepairs() {
+        return repairs;
     }
 
-    public void setSzerelesek(List<Repair> szerelesek) {
-        this.szerelesek = szerelesek;
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
     }
 
     public CarParameter getGepjarmuParameter() {
@@ -66,55 +66,56 @@ public class Car {
         this.gepjarmuParameter = gepjarmuParameter;
     }
 
-    public LocalDate getVizsgaLejarta() {
-        return vizsgaLejarta;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setVizsgaLejarta(LocalDate vizsgaLejarta) {
-        this.vizsgaLejarta = vizsgaLejarta;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
-    public Integer getEvjarat() {
-        return evjarat;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setEvjarat(Integer evjarat) {
-        this.evjarat = evjarat;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public Integer getAlvazszam() {
-        return alvazszam;
+    public Integer getVehicleIdentificationNumber() {
+        return vehicleIdentificationNumber;
     }
 
-    public void setAlvazszam(Integer alvazszam) {
-        this.alvazszam = alvazszam;
+    public void setVehicleIdentificationNumber(Integer vehicleIdentificationNumber) {
+        this.vehicleIdentificationNumber = vehicleIdentificationNumber;
     }
 
-    public String getTipus() {
-        return this.gepjarmuParameter.getTipus();
+    public String getType() {
+        return this.gepjarmuParameter.getType();
     }
 
     @Override
     public String toString() {
-        return "Gepjarmu{" +
+        return "Car{" +
                 "id=" + id +
-                ", gepjarmuparameter=" + gepjarmuParameter +
-                ", alvazszam=" + alvazszam +
-                ", vizsgaLejarta=" + vizsgaLejarta +
-                ", evjarat=" + evjarat +
+                ", gepjarmuParameter=" + gepjarmuParameter +
+                ", vehicleIdentificationNumber=" + vehicleIdentificationNumber +
+                ", expirationDate=" + expirationDate +
+                ", year=" + year +
+                ", repairs=" + repairs.size() +
                 '}';
     }
 
-    public Integer getMotorterfogat() {
+    public Integer getEngineVolume() {
 
-        return this.gepjarmuParameter.getMotorterfogat();
+        return this.gepjarmuParameter.getEngineVolume();
 
     }
 
 
-    public Integer getTeljesitmeny() {
+    public Integer getPower() {
 
-        return this.gepjarmuParameter.getTeljesitmeny();
+        return this.gepjarmuParameter.getPower();
     }
 }
 

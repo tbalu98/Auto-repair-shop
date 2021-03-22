@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import representations.PartRepresentation;
 import representations.UsedPartsRepresentation;
 import representations.AssemblyTypesRepresentation;
 import representations.AssembliesRepresentation;
@@ -104,14 +105,14 @@ public class EditRepairs extends ViewRepairs {
             FixPricedAssembly fixaruJavitas =
                     this.saveNewFixPricedRepair((FixPricedAssemblyType)this.chosenAssemblyType);
             this.assembliesRepTM.addEntity(AssembliesRepresentation.of(fixaruJavitas));
-            this.repair.getJavitasok().add(fixaruJavitas);
+            this.repair.getAssemblies().add(fixaruJavitas);
 
 
 
         }
         else if(this.chosenAssemblyType instanceof HourlyPricedAssemblyType){
             HourlyPricedAssembly hourlyPricedAssembly = this.saveNewHourlyRatedAssembly(this.chosenAssemblyType);
-            this.repair.getJavitasok().add(hourlyPricedAssembly);
+            this.repair.getAssemblies().add(hourlyPricedAssembly);
             this.assembliesRepTM.addEntity(AssembliesRepresentation.of(hourlyPricedAssembly));
         }
 
@@ -148,7 +149,7 @@ public class EditRepairs extends ViewRepairs {
         Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
         UsedPart usedPart = this.createUsedPart(part, assembly);
         this.usedPartsRepTM.addEntity(new UsedPartsRepresentation(usedPart));
-        assembly.getFelhasznaltAlkatreszek().add(usedPart);
+        assembly.getUsedParts().add(usedPart);
 
 
     }
@@ -189,8 +190,8 @@ public class EditRepairs extends ViewRepairs {
         //Javitas javitas =  this.javitasDao.getById(this.javitasokTM.getSelectedEntity().getId());
 
         Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
-        this.repair.getJavitasok().remove(assembly);
-        Logger.info(repair.getJavitasok());
+        this.repair.getAssemblies().remove(assembly);
+        Logger.info(repair.getAssemblies());
         //kivett remove
         //this.javitasDao.remove(javitas);
 
@@ -221,7 +222,7 @@ public class EditRepairs extends ViewRepairs {
         Assembly assembly = usedPart.getAssembly();
 
         //this.szereles.getJavitasok().remove(javitas);
-        assembly.getFelhasznaltAlkatreszek().remove(usedPart);
+        assembly.getUsedParts().remove(usedPart);
         //this.szereles.getJavitasok().add(javitas);
 
         //kivett remove
@@ -281,19 +282,19 @@ public class EditRepairs extends ViewRepairs {
     public void choseAssemblyType(){
 
         HourlyPricedAssemblyType hourlyPricedAssemblyType =  this.assemblyTypeDao.getById(this.assemblyTypeRepTM.getSelectedEntity().getId());
-        this.descriptionTA.setText(hourlyPricedAssemblyType.getLeiras());
+        this.descriptionTA.setText(hourlyPricedAssemblyType.getDecription());
         if(hourlyPricedAssemblyType instanceof FixPricedAssemblyType){
-            this.fixedPriceTF.setText(((FixPricedAssemblyType) hourlyPricedAssemblyType).getAr().toString());
+            this.fixedPriceTF.setText(((FixPricedAssemblyType) hourlyPricedAssemblyType).getPrice().toString());
         }
-        this.guaranteeOfAssemblyTF.setText(hourlyPricedAssemblyType.getGaranciaIdotartama()!=null ?
-                hourlyPricedAssemblyType.getGaranciaIdotartama().toString(): "");
+        this.guaranteeOfAssemblyTF.setText(hourlyPricedAssemblyType.getGuarantee()!=null ?
+                hourlyPricedAssemblyType.getGuarantee().toString(): "");
 
         this.chosenAssemblyType = hourlyPricedAssemblyType;
     }
 
     public void savePushed(){
 
-        Logger.info(repair.getJavitasok());
+        Logger.info(repair.getAssemblies());
         this.repairDao.update(repair);
 
         this.assemblyDao.removeAll(this.assembliesToBeDeleted.stream().map(j->j.getId()).collect(Collectors.toList()));
@@ -320,12 +321,12 @@ public class EditRepairs extends ViewRepairs {
        // Hibernate.initialize(szereles.getJavitasok());
 //  Logger.info(szereles.getJavitasok().get(1).getFelhasznaltAlkatreszek().get(2).getCikkszam());
   //Logger.info(szereles.aratSzamol());
-    repair.aratSzamol();
+    repair.computePrice();
  //   szereles.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
  //   szerelesDao.update(szereles);
-    Logger.info(repair.getAr());
-    this.repair.setSzerelesVege(new Timestamp(System.currentTimeMillis()));
-    this.repair.setAr(this.repair.aratSzamol());
+    Logger.info(repair.getPrice());
+    this.repair.setEndOfRepair(new Timestamp(System.currentTimeMillis()));
+    this.repair.setPrice(this.repair.computePrice());
     this.repairDao.update(this.repair);
     }
 
@@ -358,7 +359,7 @@ public class EditRepairs extends ViewRepairs {
         Assembly assembly = this.assembliesRepTM.getSelectedEntity().getAssembly();
         UsedPart usedPart = this.createUsedPart(part, assembly);
         this.usedPartsRepTM.addEntity(new UsedPartsRepresentation(usedPart));
-        assembly.getFelhasznaltAlkatreszek().add(usedPart);
+        assembly.getUsedParts().add(usedPart);
 
     }
 
@@ -372,9 +373,9 @@ public class EditRepairs extends ViewRepairs {
 
         Part part = this.partRepTM.getSelectedEntity().getPart();
         this.chosenPart = part;
-        this.nameTF.setText(part.getNev());
-        this.guaranteeOfUsedPartTF.setText(part.getGaranciaIdotartama().toString());
-        this.priceTF.setText(part.getAr().toString());
+        this.nameTF.setText(part.getName());
+        this.guaranteeOfUsedPartTF.setText(part.getGuarantee().toString());
+        this.priceTF.setText(part.getPrice().toString());
 
 
     }

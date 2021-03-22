@@ -12,35 +12,35 @@ public class Part {
     private Integer id;
 
     @Column(name = "nev")
-    private String nev;
+    private String name;
 
     @Column(name = "ar")
-    private Integer ar;
+    private Integer price;
 
     @Column(name = "garancia_idotartama")
-    private Integer garanciaIdotartama;
+    private Integer guarantee;
 
     @Column(name ="cikkszam")
-    private Integer cikkszam;
+    private Integer partCode;
     //persistbol merge
     //alkatresz volt
     @OneToMany(/*cascade = CascadeType.MERGE, */mappedBy = "part", fetch = FetchType.LAZY)
-    private List<UsedPart> felhasznaltAlkatreszek = new ArrayList<>();
+    private List<UsedPart> usedParts = new ArrayList<>();
 
     public Part() {}
 
-    public Part(String nev, Integer ar, Integer garanciaIdotartama) {
-        this.nev = nev;
-        this.ar = ar;
-        this.garanciaIdotartama = garanciaIdotartama;
+    public Part(String name, Integer price, Integer guarantee) {
+        this.name = name;
+        this.price = price;
+        this.guarantee = guarantee;
     }
 
 
-    public Part(String nev, Integer ar, Integer garanciaIdotartama, Integer cikkszam) {
-        this.nev = nev;
-        this.ar = ar;
-        this.garanciaIdotartama = garanciaIdotartama;
-        this.cikkszam = cikkszam;
+    public Part(String name, Integer price, Integer guarantee, Integer partCode) {
+        this.name = name;
+        this.price = price;
+        this.guarantee = guarantee;
+        this.partCode = partCode;
     }
 
     public Integer getId() {
@@ -52,43 +52,43 @@ public class Part {
         this.id = id;
     }
 
-    public String getNev() {
-        return nev;
+    public String getName() {
+        return name;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getAr() {
-        return ar;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setAr(Integer ar) {
-        this.ar = ar;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public Integer getGaranciaIdotartama() {
-        return garanciaIdotartama;
+    public Integer getGuarantee() {
+        return guarantee;
     }
 
-    public void setGaranciaIdotartama(Integer garanciaIdotartama) {
-        this.garanciaIdotartama = garanciaIdotartama;
+    public void setGuarantee(Integer guarantee) {
+        this.guarantee = guarantee;
     }
 
-    public List<UsedPart> getFelhasznaltAlkatreszek() {
-        return felhasznaltAlkatreszek;
+    public List<UsedPart> getUsedParts() {
+        return usedParts;
     }
 
-    public void setFelhasznaltAlkatreszek(List<UsedPart> felhasznaltAlkatreszek) {
-        this.felhasznaltAlkatreszek = felhasznaltAlkatreszek;
+    public void setUsedParts(List<UsedPart> usedParts) {
+        this.usedParts = usedParts;
     }
 
-    public Integer getCikkszam() {
-        return cikkszam;
+    public Integer getPartCode() {
+        return partCode;
     }
 
-    public void setCikkszam(Integer cikkszam) {
-        this.cikkszam = cikkszam;
+    public void setPartCode(Integer partCode) {
+        this.partCode = partCode;
     }
 }

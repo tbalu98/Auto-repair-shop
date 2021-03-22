@@ -13,16 +13,16 @@ public class FixPricedAssemblyType extends HourlyPricedAssemblyType {
     
     public FixPricedAssemblyType(){}
 
-    public FixPricedAssemblyType(String leiras, Integer garanciaIdotartama, Integer fixAr) {
-        super(leiras,garanciaIdotartama);
-        this.fixAr = fixAr;
+    public FixPricedAssemblyType(String description, Integer guarantee, Integer fixedPrice) {
+        super(description,guarantee);
+        this.fixAr = fixedPrice;
     }
 
-    public Integer getAr() {
+    public Integer getPrice() {
         return fixAr;
     }
 
-    public void setAr(Integer ar) {
-        this.fixAr = ar;
+    public void setAr(Integer price) {
+        this.fixAr = price;
     }
 }

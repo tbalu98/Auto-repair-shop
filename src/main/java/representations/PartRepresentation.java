@@ -1,4 +1,6 @@
-package entities;
+package representations;
+
+import entities.Part;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +50,12 @@ public class PartRepresentation {
 
     //Modositottam
     public PartRepresentation(Part part) {
-        this.alkatreszNev = part.getNev();
-        this.alkatreszAr = part.getAr();
-        this.alkatreszGaranciaIdotartama = part.getGaranciaIdotartama();
+        this.alkatreszNev = part.getName();
+        this.alkatreszAr = part.getPrice();
+        this.alkatreszGaranciaIdotartama = part.getGuarantee();
         this.part = part;
         //Hozzaadtam
-        this.alkatreszCikkszam = part.getCikkszam();
+        this.alkatreszCikkszam = part.getPartCode();
     }
 
     public String getAlkatreszNev() {

@@ -28,13 +28,13 @@ public class FinishedRepairsRepresentation<T> {
     private Repair repair;
 
     public FinishedRepairsRepresentation(Repair repair) {
-        this.nev = repair.getUgyfelNev();
-        this.telefonszam = repair.getUgyfelTelefonszam();
-        this.alvazszam = repair.getGepjarmuAlvazszam();
+        this.nev = repair.getCustomerName();
+        this.telefonszam = repair.getCustomerTelephoneNumber();
+        this.alvazszam = repair.getVehicleIdentificationNumber();
         //this.tipus = szereles.getGepjarmu().getGepjarmuparameter().getTipus();
-        this.tipus = repair.getGepjarmuTipus();
-        this.szerelesVege = repair.getSzerelesVege();
-        this.ar = repair.getAr();
+        this.tipus = repair.getCarType();
+        this.szerelesVege = repair.getEndOfRepair();
+        this.ar = repair.getPrice();
         this.repair = repair;
     }
 

@@ -3,7 +3,7 @@ package daos;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import entities.CarParameter;
-import entities.QGepjarmuparameter;
+import entities.QCarParameter;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -16,18 +16,18 @@ public class AutoParameterDao extends BasicDao<CarParameter>{
 
     public List<CarParameter> find(CarParameter carParameter){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QGepjarmuparameter qGepjarmuparameter = QGepjarmuparameter.gepjarmuparameter;
+        QCarParameter qCarParameter = QCarParameter.carParameter;
 
-        JPAQuery<CarParameter> query = queryFactory.selectFrom(qGepjarmuparameter);
+        JPAQuery<CarParameter> query = queryFactory.selectFrom(qCarParameter);
 
-        if(carParameter.getMotorterfogat()!=null){
-            query.where(qGepjarmuparameter.motorterfogat.like("%"+ carParameter.getMotorterfogat()+"%"));
+        if(carParameter.getEngineVolume()!=null){
+            query.where(qCarParameter.engineVolume.like("%"+ carParameter.getEngineVolume()+"%"));
         }
-        if(!carParameter.getTipus().equals("")){
-            query.where(qGepjarmuparameter.tipus.like("%" + carParameter.getTipus()+"%"));
+        if(!carParameter.getType().equals("")){
+            query.where(qCarParameter.type.like("%" + carParameter.getType()+"%"));
         }
-        if(carParameter.getTeljesitmeny()!=null){
-            query.where(qGepjarmuparameter.teljesitmeny.like("%"+ carParameter.getTeljesitmeny() +"%"));
+        if(carParameter.getPower()!=null){
+            query.where(qCarParameter.power.like("%"+ carParameter.getPower() +"%"));
         }
 
         return query.fetch();

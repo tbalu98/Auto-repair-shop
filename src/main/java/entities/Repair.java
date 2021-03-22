@@ -18,10 +18,10 @@ public class Repair implements hasPrice {
     private Integer id;
 
     @Column(nullable = false, name = "szereles_kezdete")
-    private Timestamp szerelesKezdete;
+    private Timestamp startOfRepair;
 
     @Column(name = "szereles_vege")
-    private Timestamp szerelesVege;
+    private Timestamp endOfRepair;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gepjarmu_id")
@@ -33,11 +33,11 @@ public class Repair implements hasPrice {
 
     //szereles volt
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "repair", fetch = FetchType.LAZY)
-    private List<Assembly> javitasok = new ArrayList<>();
+    private List<Assembly> assemblies = new ArrayList<>();
 
 
     @Column(name = "ar")
-    private Integer ar;
+    private Integer price;
 
 
     public Repair(){}
@@ -47,28 +47,28 @@ public class Repair implements hasPrice {
         this.car = car;
         this.customer = customer;
 
-        this.szerelesKezdete = new Timestamp(System.currentTimeMillis());
+        this.startOfRepair = new Timestamp(System.currentTimeMillis());
 
-        this.ar = 0;
+        this.price = 0;
 
     }
 
-    public Repair(Timestamp szerelesKezdete, Timestamp szerelesVege, Car car, Customer customer, List<Assembly> javitasok, Integer ar) {
-        this.szerelesKezdete = szerelesKezdete;
-        this.szerelesVege = szerelesVege;
+    public Repair(Timestamp startOfRepair, Timestamp endOfRepair, Car car, Customer customer, List<Assembly> assemblies, Integer price) {
+        this.startOfRepair = startOfRepair;
+        this.endOfRepair = endOfRepair;
         this.car = car;
         this.customer = customer;
-        this.javitasok = javitasok;
-        this.ar = ar;
+        this.assemblies = assemblies;
+        this.price = price;
     }
 
-    public Repair(Timestamp szerelesKezdete, Timestamp szerelesVege, Car car, Customer customer,
-                  Integer ar) {
-        this.szerelesKezdete = szerelesKezdete;
-        this.szerelesVege = szerelesVege;
+    public Repair(Timestamp startOfRepair, Timestamp endOfRepair, Car car, Customer customer,
+                  Integer price) {
+        this.startOfRepair = startOfRepair;
+        this.endOfRepair = endOfRepair;
         this.car = car;
         this.customer = customer;
-        this.ar = ar;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -79,20 +79,20 @@ public class Repair implements hasPrice {
         this.id = id;
     }
 
-    public Timestamp getSzerelesKezdete() {
-        return szerelesKezdete;
+    public Timestamp getStartOfRepair() {
+        return startOfRepair;
     }
 
-    public void setSzerelesKezdete(Timestamp szerelesKezdete) {
-        this.szerelesKezdete = szerelesKezdete;
+    public void setStartOfRepair(Timestamp startOfRepair) {
+        this.startOfRepair = startOfRepair;
     }
 
-    public Timestamp getSzerelesVege() {
-        return szerelesVege;
+    public Timestamp getEndOfRepair() {
+        return endOfRepair;
     }
 
-    public void setSzerelesVege(Timestamp szerelesVege) {
-        this.szerelesVege = szerelesVege;
+    public void setEndOfRepair(Timestamp endOfRepair) {
+        this.endOfRepair = endOfRepair;
     }
 
     public Car getCar() {
@@ -111,21 +111,21 @@ public class Repair implements hasPrice {
         this.customer = customer;
     }
 
-    public Integer getAr() {
-        return ar;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setAr(Integer ar) {
-        this.ar = ar;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public List<Assembly> getJavitasok() {
+    public List<Assembly> getAssemblies() {
 
-        return javitasok;
+        return assemblies;
     }
 
-    public void setJavitasok(List<Assembly> javitasok) {
-        this.javitasok = javitasok;
+    public void setAssemblies(List<Assembly> assemblies) {
+        this.assemblies = assemblies;
     }
 /*
     public Integer getMunkaorakSzama() {
@@ -136,35 +136,34 @@ public class Repair implements hasPrice {
         this.munkaorakSzama = munkaorakSzama;
     }*/
 
-
     @Override
     public String toString() {
-        return "Szereles{" +
+        return "Repair{" +
                 "id=" + id +
-                ", szerelesKezdete=" + szerelesKezdete +
-                ", szerelesVege=" + szerelesVege +
-                ", gepjarmu=" + car.getId() +
-                ", ugyfel=" + customer.getId() +
-                ", javitasok=" + javitasok +
-                ", ar=" + ar +
+                ", startOfRepair=" + startOfRepair +
+                ", endOfRepair=" + endOfRepair +
+                ", car=" + car +
+                ", customer=" + customer +
+                ", assemblies=" + assemblies.size() +
+                ", price=" + price +
                 '}';
     }
 
     public List<Object> getJavitasokIdk() {
         List<Object> javitasokIdk = new ArrayList<>();
-        Logger.info(this.getJavitasok().size());
-        for(Assembly assembly : this.getJavitasok()){
+        Logger.info(this.getAssemblies().size());
+        for(Assembly assembly : this.getAssemblies()){
             javitasokIdk.add(assembly.getId());
 
         }
         return javitasokIdk;
     }
-    public Integer aratSzamol(){
+    public Integer computePrice(){
 
         Integer ar = new Integer(0);
-        for(Assembly assembly : this.getJavitasok()){
+        for(Assembly assembly : this.getAssemblies()){
 
-            ar += assembly.aratSzamol();
+            ar += assembly.computePrice();
             /*
             if(javitas instanceof FixAruJavitas) {
                 Logger.info("Fix");
@@ -175,43 +174,43 @@ public class Repair implements hasPrice {
             }*/
 
         }
-        this.ar = ar;
+        this.price = ar;
         return ar;
     }
 
-    public String getUgyfelNev() {
-        return this.customer.getNev();
+    public String getCustomerName() {
+        return this.customer.getName();
     }
 
-    public String getUgyfelTelefonszam() {
-    return  this.customer.getTelefonszam();
+    public String getCustomerTelephoneNumber() {
+    return  this.customer.getTelephoneNumber();
     }
 
-    public Integer getGepjarmuAlvazszam() {
-        return this.car.getAlvazszam();
+    public Integer getVehicleIdentificationNumber() {
+        return this.car.getVehicleIdentificationNumber();
     }
 
-    public String getGepjarmuTipus() {
-        return this.car.getTipus();
+    public String getCarType() {
+        return this.car.getType();
     }
 
-    public String getUgyfelLakcim() {
-        return this.getCustomer().getLakcim();
+    public String getCustomerAddress() {
+        return this.getCustomer().getAddress();
     }
 
-    public Integer getGepjarmuMotorTerfogat() {
-        return this.car.getMotorterfogat();
+    public Integer getVolumeOfEngine() {
+        return this.car.getEngineVolume();
     }
 
-    public Integer getGepjarmuEvjarat() {
-        return this.car.getEvjarat();
+    public Integer getYearOfCar() {
+        return this.car.getYear();
     }
 
-    public Integer getGepjarmuTeljesitmeny() {
-        return this.car.getTeljesitmeny();
+    public Integer getCarPower() {
+        return this.car.getPower();
     }
 
-    public LocalDate getGepjarmuVizsgaLejarta() {
-        return this.car.getVizsgaLejarta();
+    public LocalDate getExpirationDate() {
+        return this.car.getExpirationDate();
     }
 }

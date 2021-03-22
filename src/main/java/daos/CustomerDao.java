@@ -3,7 +3,8 @@ package daos;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import entities.Customer;
-import entities.QUgyfel;
+import entities.QCustomer;
+
 import org.pmw.tinylog.Logger;
 
 import javax.persistence.EntityManager;
@@ -18,19 +19,19 @@ public class CustomerDao extends BasicDao<Customer> {
     public List<Customer> find(Customer customer){
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QUgyfel qUgyfel = QUgyfel.ugyfel;
+        QCustomer qCustomer = QCustomer.customer;
 
-        JPAQuery<Customer> query = queryFactory.selectFrom(qUgyfel);
+        JPAQuery<Customer> query = queryFactory.selectFrom(qCustomer);
 
-        if(!customer.getLakcim().equals("")){
-            query.where(qUgyfel.lakcim.like("%"+ customer.getLakcim()+"%"));
+        if(!customer.getAddress().equals("")){
+            query.where(qCustomer.address.like("%"+ customer.getAddress()+"%"));
         }
-        if(!customer.getNev().equals("")){
-            Logger.info("van név" + customer.getNev());
-            query.where(qUgyfel.nev.like("%"+ customer.getNev()+"%" ));
+        if(!customer.getName().equals("")){
+            Logger.info("van név" + customer.getName());
+            query.where(qCustomer.name.like("%"+ customer.getName()+"%" ));
         }
-        if(!customer.getTelefonszam().equals("")){
-        query.where(qUgyfel.telefonszam.like("%"+ customer.getTelefonszam()+"%"));
+        if(!customer.getTelephoneNumber().equals("")){
+        query.where(qCustomer.telephoneNumber.like("%"+ customer.getTelephoneNumber()+"%"));
         }
         Logger.info(query.fetch());
         return query.fetch();

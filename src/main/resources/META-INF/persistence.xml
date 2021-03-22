@@ -10,7 +10,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
         <class>entities.CarParameter</class>
         <class>entities.Repair</class>
         <class>entities.Part</class>
-        <class>entities.SzereleshezHasznaltAlkatresz</class>
+        <class>entities.UsedPart</class>
         <class>entities.Assembly</class>
         <class>entities.FixPricedAssembly</class>
         <class>entities.HourlyPricedAssembly</class>

@@ -21,14 +21,14 @@ public class AssemblyTypeDao extends BasicDao<HourlyPricedAssemblyType> {
     }*/
     public List<HourlyPricedAssemblyType> findOradijasJavitasTipus(AssemblyTypeFilter assemblyTypeFilter){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QOradijasJavitasTipus qOradijasJavitasTipus = QOradijasJavitasTipus.oradijasJavitasTipus;
+        QHourlyPricedAssemblyType qHourlyPricedAssemblyType = QHourlyPricedAssemblyType.hourlyPricedAssemblyType;
 
-            JPAQuery<HourlyPricedAssemblyType> query =  queryFactory.selectFrom(qOradijasJavitasTipus);
+            JPAQuery<HourlyPricedAssemblyType> query =  queryFactory.selectFrom(qHourlyPricedAssemblyType);
             if(assemblyTypeFilter.getGaranciIdotartama()!=null){
-                query.where(qOradijasJavitasTipus.garanciaIdotartama.eq(assemblyTypeFilter.getGaranciIdotartama()));
+                query.where(qHourlyPricedAssemblyType.guarantee.eq(assemblyTypeFilter.getGaranciIdotartama()));
             }
             if(!assemblyTypeFilter.getLeiras().equals("")){
-                query.where(qOradijasJavitasTipus.leiras.eq(assemblyTypeFilter.getLeiras()));
+                query.where(qHourlyPricedAssemblyType.decription.eq(assemblyTypeFilter.getLeiras()));
             }
             return query.fetch();
 
@@ -38,17 +38,17 @@ public class AssemblyTypeDao extends BasicDao<HourlyPricedAssemblyType> {
     public List<FixPricedAssemblyType> findFixaruJavitasTipusok(AssemblyTypeFilter assemblyTypeFilter){
 
             JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-            QFixAruJavitasTipus qFixAruJavitasTipus = QFixAruJavitasTipus.fixAruJavitasTipus;
+            QFixPricedAssemblyType qFixPricedAssemblyType = QFixPricedAssemblyType.fixPricedAssemblyType;
 
-            JPAQuery<FixPricedAssemblyType> query = queryFactory.selectFrom(qFixAruJavitasTipus);
+            JPAQuery<FixPricedAssemblyType> query = queryFactory.selectFrom(qFixPricedAssemblyType);
 
-            query.where(qFixAruJavitasTipus.fixAr.eq(assemblyTypeFilter.getFixar()));
+            query.where(qFixPricedAssemblyType.fixAr.eq(assemblyTypeFilter.getFixar()));
 
             if(assemblyTypeFilter.getGaranciIdotartama()!=null){
-                query.where(qFixAruJavitasTipus.garanciaIdotartama.eq(assemblyTypeFilter.getGaranciIdotartama()));
+                query.where(qFixPricedAssemblyType.guarantee.eq(assemblyTypeFilter.getGaranciIdotartama()));
             }
             if(!assemblyTypeFilter.getLeiras().equals("")){
-                query.where(qFixAruJavitasTipus.leiras.eq(assemblyTypeFilter.getLeiras()));
+                query.where(qFixPricedAssemblyType.decription.eq(assemblyTypeFilter.getLeiras()));
             }
 
             return query.fetch();

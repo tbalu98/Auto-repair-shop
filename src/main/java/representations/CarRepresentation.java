@@ -42,12 +42,12 @@ public class CarRepresentation {
 
 
     public CarRepresentation(Car car){
-        this.alvazszam = car.getAlvazszam();
-        this.vizsgaLejarta = car.getVizsgaLejarta();
-        this.evjarat = car.getEvjarat();
-        this.ptipus = car.getTipus();
-        this.pmotorterfogat = car.getMotorterfogat();
-        this.pteljesitmeny = car.getTeljesitmeny();
+        this.alvazszam = car.getVehicleIdentificationNumber();
+        this.vizsgaLejarta = car.getExpirationDate();
+        this.evjarat = car.getYear();
+        this.ptipus = car.getType();
+        this.pmotorterfogat = car.getEngineVolume();
+        this.pteljesitmeny = car.getPower();
         this.car = car;
 
     }

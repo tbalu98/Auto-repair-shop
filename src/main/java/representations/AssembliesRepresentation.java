@@ -57,9 +57,9 @@ public class AssembliesRepresentation {
     public AssembliesRepresentation(FixPricedAssembly fixPricedAssembly){
         this.assembly = fixPricedAssembly;
         this.id = fixPricedAssembly.getId();
-        this.ar = fixPricedAssembly.getFixPricedAssemblyType().getAr();
-        this.leiras = fixPricedAssembly.getFixPricedAssemblyType().getLeiras();
-        this.javitasGaranciaIdotartama = fixPricedAssembly.getFixPricedAssemblyType().getGaranciaIdotartama();
+        this.ar = fixPricedAssembly.getFixPricedAssemblyType().getPrice();
+        this.leiras = fixPricedAssembly.getFixPricedAssemblyType().getDecription();
+        this.javitasGaranciaIdotartama = fixPricedAssembly.getFixPricedAssemblyType().getGuarantee();
 
 
     }
@@ -67,10 +67,10 @@ public class AssembliesRepresentation {
     public AssembliesRepresentation(HourlyPricedAssembly hourlyPricedAssembly){
         this.assembly = hourlyPricedAssembly;
         this.id = hourlyPricedAssembly.getId();
-        this.javitasGaranciaIdotartama = hourlyPricedAssembly.getHourlyPricedAssemblyType().getGaranciaIdotartama();
-        this.leiras = hourlyPricedAssembly.getHourlyPricedAssemblyType().getLeiras();
-        this.munkaorakSzama = hourlyPricedAssembly.getMunkaOrakSzama();
-        this.ar = hourlyPricedAssembly.aratSzamol();
+        this.javitasGaranciaIdotartama = hourlyPricedAssembly.getHourlyPricedAssemblyType().getGuarantee();
+        this.leiras = hourlyPricedAssembly.getHourlyPricedAssemblyType().getDecription();
+        this.munkaorakSzama = hourlyPricedAssembly.getNumofWorkingHours();
+        this.ar = hourlyPricedAssembly.computePrice();
 
     }
 

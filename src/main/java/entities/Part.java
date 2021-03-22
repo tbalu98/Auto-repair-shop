@@ -4,6 +4,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Represent technical information of parts.
+ * */
+
+
 @Entity(name = "alkatresz")
 public class Part {
 

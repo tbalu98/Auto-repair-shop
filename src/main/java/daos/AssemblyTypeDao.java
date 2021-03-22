@@ -8,18 +8,27 @@ import filters.AssemblyTypeFilter;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+
+/**
+ * Dao class for assembly types.
+ * */
+
+
 public class AssemblyTypeDao extends BasicDao<HourlyPricedAssemblyType> {
     public AssemblyTypeDao(EntityManager em) {
         super(HourlyPricedAssemblyType.class);
         this.em = em;
     }
-/*
-    public List<Szereles> folyamatbanLevoSzerelesek(){
-        JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
-        QSzereles qSzereles = QSzereles.szereles;
-        return queryFactory.selectFrom(qSzereles).where(qSzereles.szerelesVege.isNull()).fetch();
-    }*/
-    public List<HourlyPricedAssemblyType> findOradijasJavitasTipus(AssemblyTypeFilter assemblyTypeFilter){
+
+    /**
+     * This method fetches the hourly priced assembly types from the database that you are searching for.
+     *
+     * @param assemblyTypeFilter This object contains the information about the assembly type we are looking for,
+     * @return List<HourlyPricedAssemblyType> Returns a list of assembly types that best match with the filer.
+     * */
+
+
+    public List<HourlyPricedAssemblyType> findHourlyPricedAssemblyType(AssemblyTypeFilter assemblyTypeFilter){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
         QHourlyPricedAssemblyType qHourlyPricedAssemblyType = QHourlyPricedAssemblyType.hourlyPricedAssemblyType;
 
@@ -35,7 +44,15 @@ public class AssemblyTypeDao extends BasicDao<HourlyPricedAssemblyType> {
 
     }
 
-    public List<FixPricedAssemblyType> findFixaruJavitasTipusok(AssemblyTypeFilter assemblyTypeFilter){
+    /**
+     * This method returns the fix priced assembly types that you are searching for.
+     *
+     * @param assemblyTypeFilter This object contains the information about the assembly type we are looking for,
+     * @return List<FixPricedAssemblyType> Returns a list of assembly types that best match with the filer.
+     * */
+
+
+    public List<FixPricedAssemblyType> findFixPricedAssemblyType(AssemblyTypeFilter assemblyTypeFilter){
 
             JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
             QFixPricedAssemblyType qFixPricedAssemblyType = QFixPricedAssemblyType.fixPricedAssemblyType;

@@ -248,9 +248,9 @@ public class EditRepairs extends ViewRepairs {
         List javitasTipusok;
 
         if(assemblyTypeFilter.getFixar()==null) {
-                        javitasTipusok = this.assemblyTypeDao.findOradijasJavitasTipus(assemblyTypeFilter);
+                        javitasTipusok = this.assemblyTypeDao.findHourlyPricedAssemblyType(assemblyTypeFilter);
         }else{
-            javitasTipusok = this.assemblyTypeDao.findFixaruJavitasTipusok(assemblyTypeFilter);
+            javitasTipusok = this.assemblyTypeDao.findFixPricedAssemblyType(assemblyTypeFilter);
 
         }
 

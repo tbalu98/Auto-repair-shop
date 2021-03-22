@@ -20,7 +20,7 @@ public class NewRepair extends CarRepairshopBasicController {
     private CustomerDao customerDao = new CustomerDao(EntityManagerCreator.getEntityManager());
     private CarDao carDao = new CarDao(EntityManagerCreator.getEntityManager());
     private RepairDao repairDao = new RepairDao(EntityManagerCreator.getEntityManager());
-    private AutoParameterDao autoParameterDao = new AutoParameterDao(EntityManagerCreator.getEntityManager());
+    private CarParameterDao carParameterDao = new CarParameterDao(EntityManagerCreator.getEntityManager());
 
     //@FXML private TextField nevTextField;
     @FXML private TextField telephoneNumberTF;
@@ -212,7 +212,7 @@ public class NewRepair extends CarRepairshopBasicController {
     private void saveRepairsEntity() {
 
         this.customerDao.saveOrUpdate(this.customer);
-        this.autoParameterDao.saveOrUpdate(this.carParameter);
+        this.carParameterDao.saveOrUpdate(this.carParameter);
         this.carDao.saveOrUpdate(this.car);
 
     }
@@ -252,7 +252,7 @@ public class NewRepair extends CarRepairshopBasicController {
 
     public void findCarParameterPushed(){
         Logger.info(this.createCar());
-        this.carParameterTM.setEntitasok(this.autoParameterDao.find(this.createCarParameter()));
+        this.carParameterTM.setEntitasok(this.carParameterDao.find(this.createCarParameter()));
 
     }
 

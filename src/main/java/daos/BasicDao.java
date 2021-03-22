@@ -9,6 +9,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An abstract class that represent the most important functionalities of a dao class like saving, updating
+ * deleting and fetching object from the database.
+ * */
+
+
 public abstract class BasicDao<T> implements Serializable {
 
     protected Class<T> entityClass;

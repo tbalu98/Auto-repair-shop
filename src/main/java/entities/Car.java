@@ -6,6 +6,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This represents the car objects. The technical parameters of it are in a different class called
+ * CarParameter
+ *
+ * */
+
+
 @Entity(name = "gepjarmu")
 public class Car {
 

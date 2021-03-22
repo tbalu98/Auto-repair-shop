@@ -4,6 +4,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * An assembly contains information about the parts that were used to mend the car and the repair
+ * that contains the individual assemblies the car and the customer. The repair is like the bill.
+ *
+ * */
+
+
 @Entity(name = "javitas")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.DiscriminatorFormula(
@@ -87,6 +95,11 @@ public abstract class Assembly implements hasPrice {
 
     public abstract Integer computePrice();
 
+    /**
+     * Computes the price of the parts used in the assembly.
+     * @return Integer
+     * */
+
     protected Integer priceofParts(){
 
         Integer price = new Integer(0);
@@ -99,7 +112,7 @@ public abstract class Assembly implements hasPrice {
         return price;
 
     }
-
+/*
     public List<Object> getFelhasznaltAlkatreszekIdei(){
 
         List<Object> idk = new ArrayList<>();
@@ -109,5 +122,5 @@ public abstract class Assembly implements hasPrice {
 
         }
         return idk;
-    }
+    }*/
 }

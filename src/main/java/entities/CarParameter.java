@@ -2,6 +2,11 @@ package entities;
 
 import javax.persistence.*;
 
+/**
+ * Contains the technical parameters of the car.
+ *
+ * */
+
 @Entity(name = "gepjarmuparameter")
 public class CarParameter {
 

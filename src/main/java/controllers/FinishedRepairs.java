@@ -37,7 +37,7 @@ public class FinishedRepairs extends CarRepairshopBasicController {
         Timestamp from = Timestamp.valueOf(LocalDate.of(LocalDate.now().getYear(),1,1 ).atStartOfDay());
         Timestamp to = new Timestamp(System.currentTimeMillis());
 
-        this.finishedRepairsTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getLezartSzerelesek(from, to)));
+        this.finishedRepairsTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getFinishedRepairs(from, to)));
         this.setIncomeL();
     }
 
@@ -48,7 +48,7 @@ public class FinishedRepairs extends CarRepairshopBasicController {
             Timestamp from = Timestamp.valueOf(fromDP.getValue().atStartOfDay());
             Timestamp to = Timestamp.valueOf(toDP.getValue().atStartOfDay());
             Logger.info("keres");
-            this.finishedRepairsTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getLezartSzerelesek(from, to)));
+            this.finishedRepairsTM.setEntitasok(FinishedRepairsRepresentation.of(this.repairDao.getFinishedRepairs(from, to)));
             this.setIncomeL();
 
         }

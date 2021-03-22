@@ -16,6 +16,14 @@ public class CustomerDao extends BasicDao<Customer> {
         this.em = em;
     }
 
+
+    /**
+     * This method fetches the customers from the database that you are searching for.
+     *
+     * @param customer This object contains the information about the assembly type we are looking for,
+     * @return List<HourlyPricedAssemblyType> Returns a list of assembly types that best match with the filer.
+     * */
+
     public List<Customer> find(Customer customer){
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);

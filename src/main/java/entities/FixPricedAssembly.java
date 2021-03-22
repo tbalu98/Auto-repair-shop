@@ -2,6 +2,13 @@ package entities;
 
 import javax.persistence.*;
 
+/**
+ * This class represents assemblies that has fixed price. The technical specification of the
+ * assembly is a {@FixedPriceAssemblyType}.
+ *
+ * */
+
+
 @Entity
 @DiscriminatorValue("FAJ")
 public class FixPricedAssembly extends Assembly {
@@ -18,6 +25,12 @@ public class FixPricedAssembly extends Assembly {
         this.fixPricedAssemblyType = fixPricedAssemblyType;
     }
 
+
+    /**
+     * Adds the price of the parts used in this ficed priced assembly and the fixed price of
+     * the assembly.
+     * @return Integer price of the {@FixedPricedAssembly}
+     * */
 
     @Override
     public Integer computePrice() {

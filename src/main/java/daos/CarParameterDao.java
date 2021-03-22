@@ -8,12 +8,22 @@ import entities.QCarParameter;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class AutoParameterDao extends BasicDao<CarParameter>{
-    public AutoParameterDao(EntityManager em) {
+/**
+ * A dao for CarParameter objects.
+ * */
+
+public class CarParameterDao extends BasicDao<CarParameter>{
+    public CarParameterDao(EntityManager em) {
         super(CarParameter.class);
         this.em = em;
     }
 
+    /**
+     * This method fetches the car parameters from the database that you are searching for.
+     *
+     * @param carParameter This object contains the information about the car we are looking for,
+     * @return List<Car> Returns a list of assembly types that best match with the filer.
+     * */
     public List<CarParameter> find(CarParameter carParameter){
         JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
         QCarParameter qCarParameter = QCarParameter.carParameter;

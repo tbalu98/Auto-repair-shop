@@ -9,6 +9,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
+/**
+ * Every time there is a new car to be repaired a new Repair object is created. It contains information
+ * about the customer, car, price of repair etc...
+ * */
+
 
 @Entity(name = "szereles")
 public class Repair implements hasPrice {
@@ -148,7 +153,7 @@ public class Repair implements hasPrice {
                 ", price=" + price +
                 '}';
     }
-
+/*
     public List<Object> getJavitasokIdk() {
         List<Object> javitasokIdk = new ArrayList<>();
         Logger.info(this.getAssemblies().size());
@@ -157,7 +162,7 @@ public class Repair implements hasPrice {
 
         }
         return javitasokIdk;
-    }
+    }*/
     public Integer computePrice(){
 
         Integer ar = new Integer(0);

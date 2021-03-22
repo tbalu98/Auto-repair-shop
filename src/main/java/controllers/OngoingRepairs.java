@@ -30,7 +30,7 @@ public class OngoingRepairs extends CarRepairshopBasicController {
 
        onGoingRepairsTM = new TableManagerImpl<>(this.ongoingRepairsTV);
 
-        List<Repair> ongoingRepairs = this.repairDao.folyamatbanLevoSzerelesek();
+        List<Repair> ongoingRepairs = this.repairDao.onGoingRepairs();
 
         List<OngoingRepairsRepresentation> ongoingRepairsRep =
                 OngoingRepairsRepresentation.of(ongoingRepairs);
